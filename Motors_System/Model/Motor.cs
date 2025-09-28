@@ -20,5 +20,6 @@ namespace Motors_System.Model
         public decimal Price { get; set; }
 
         public int? StockQuantity { get; set; }
+        public int Category_id { get; set; }
     }
 }

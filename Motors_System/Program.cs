@@ -1,4 +1,5 @@
 ﻿using Motors_System.Forms;
+using Motors_System.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace Motors_System
             Application.SetCompatibleTextRenderingDefault(false);
             
             Application.Run(new MotorForm());
+           
             
         }
     }
