@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Motors_System.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Configuration;
-using System.Data.SqlClient;
 
 namespace Motors_System.Forms
 {
@@ -51,35 +52,47 @@ namespace Motors_System.Forms
                 try
                 {
                     con.Open();
-                    string query = "SELECT COUNT(*) FROM Users WHERE UserName=@uname AND PasswordHash=@pass";
+                    // جلب بيانات المستخدم إذا كانت مطابقة
+                    string query = "SELECT UserId, UserName, PasswordHash, Role FROM Users WHERE UserName=@uname AND PasswordHash=@pass";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
                         cmd.Parameters.AddWithValue("@uname", username);
                         cmd.Parameters.AddWithValue("@pass", password);
 
-                        int count = Convert.ToInt32(cmd.ExecuteScalar());
-
-                        if (count > 0)
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            MessageBox.Show("تم تسجيل الدخول بنجاح ✅", "نجاح", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            if (reader.Read())
+                            {
+                                // حفظ بيانات المستخدم في CurrentUser
+                                CurrentUser.Id = reader.GetInt32(0);
+                                CurrentUser.Name = reader.GetString(1);
+                                CurrentUser.Role = reader.GetString(3);
 
-                            // افتح الفورم الرئيسي
-                            MainForm main = new MainForm();
-                            main.Show();
-                            this.Hide();
-                        }
-                        else
-                        {
-                            MessageBox.Show("اسم المستخدم أو كلمة المرور غير صحيحة ❌", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show("تم تسجيل الدخول بنجاح ✅", "نجاح", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                                // افتح الفورم الرئيسي
+                                MainForm main = new MainForm();
+                                main.Show();
+                                this.Hide();
+                            }
+                            else
+                            {
+                                MessageBox.Show("اسم المستخدم أو كلمة المرور غير صحيحة ❌", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("خطأ في الاتصال: " + ex.Message);
+                    MessageBox.Show("خطأ في الاتصال: " + ex.Message, "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

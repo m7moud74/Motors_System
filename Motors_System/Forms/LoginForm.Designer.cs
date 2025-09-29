@@ -37,43 +37,43 @@
             // 
             // User_Name_TB
             // 
-            this.User_Name_TB.Location = new System.Drawing.Point(368, 64);
+            this.User_Name_TB.Location = new System.Drawing.Point(322, 64);
             this.User_Name_TB.Name = "User_Name_TB";
-            this.User_Name_TB.Size = new System.Drawing.Size(100, 22);
+            this.User_Name_TB.Size = new System.Drawing.Size(88, 24);
             this.User_Name_TB.TabIndex = 0;
             this.User_Name_TB.TextChanged += new System.EventHandler(this.User_Name_TB_TextChanged);
             // 
             // User_pass_Tb
             // 
-            this.User_pass_Tb.Location = new System.Drawing.Point(368, 116);
+            this.User_pass_Tb.Location = new System.Drawing.Point(322, 116);
             this.User_pass_Tb.Name = "User_pass_Tb";
-            this.User_pass_Tb.Size = new System.Drawing.Size(100, 22);
+            this.User_pass_Tb.Size = new System.Drawing.Size(88, 24);
             this.User_pass_Tb.TabIndex = 1;
             this.User_pass_Tb.TextChanged += new System.EventHandler(this.User_pass_Tb_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(556, 70);
+            this.label1.Location = new System.Drawing.Point(486, 70);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 16);
+            this.label1.Size = new System.Drawing.Size(101, 17);
             this.label1.TabIndex = 2;
             this.label1.Text = "اسم المستخدم";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(556, 116);
+            this.label2.Location = new System.Drawing.Point(486, 116);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(62, 16);
+            this.label2.Size = new System.Drawing.Size(74, 17);
             this.label2.TabIndex = 3;
             this.label2.Text = "كلمة المرور";
             // 
             // Login_Btn
             // 
-            this.Login_Btn.Location = new System.Drawing.Point(359, 162);
+            this.Login_Btn.Location = new System.Drawing.Point(314, 162);
             this.Login_Btn.Name = "Login_Btn";
-            this.Login_Btn.Size = new System.Drawing.Size(129, 23);
+            this.Login_Btn.Size = new System.Drawing.Size(113, 23);
             this.Login_Btn.TabIndex = 4;
             this.Login_Btn.Text = "تسجيل الدخول";
             this.Login_Btn.UseVisualStyleBackColor = true;
@@ -81,9 +81,9 @@
             // 
             // LoginForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(700, 450);
             this.Controls.Add(this.Login_Btn);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -91,6 +91,7 @@
             this.Controls.Add(this.User_Name_TB);
             this.Name = "LoginForm";
             this.Text = "LoginForm";
+            this.Load += new System.EventHandler(this.LoginForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -39,5 +39,12 @@ namespace Motors_System.Forms
             returns.Show();
             this.Hide();
         }
+
+        private void Go_Users_btn_Click(object sender, EventArgs e)
+        {
+            User_Form returns = new User_Form();
+            returns.Show();
+            this.Hide();
+        }
     }
 }

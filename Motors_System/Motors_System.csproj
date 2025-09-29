@@ -77,9 +77,23 @@
     <Compile Include="Forms\Sales_invoice_Form.Designer.cs">
       <DependentUpon>Sales_invoice_Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Show_returns.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Show_returns.Designer.cs">
+      <DependentUpon>Show_returns.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\User_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\User_Form.Designer.cs">
+      <DependentUpon>User_Form.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model\Category.cs" />
+    <Compile Include="Model\CurrentUser.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Motor.cs" />
+    <Compile Include="Model\Return.cs" />
     <Compile Include="Model\Sales.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Program.cs" />
@@ -98,6 +112,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Sales_invoice_Form.resx">
       <DependentUpon>Sales_invoice_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Show_returns.resx">
+      <DependentUpon>Show_returns.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\User_Form.resx">
+      <DependentUpon>User_Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -28,7 +28,7 @@ namespace Motors_System.Forms
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
-                string query = "SELECT * FROM Sales";
+                string query = "SELECT * FROM Sales WHERE Quantity > 0";
                 SqlCommand cmd = new SqlCommand(query, con);
 
                 try
@@ -76,7 +76,7 @@ namespace Motors_System.Forms
                 TB_Custmor_name.Text = dgv_Return.CurrentRow.Cells["Customer_Name"]?.Value?.ToString() ?? "";
                 Tb_Contact.Text = dgv_Return.CurrentRow.Cells["Customer_Contact"]?.Value?.ToString() ?? "";
                 TB_Motor_Name.Text = dgv_Return.CurrentRow.Cells["Motor_Model"]?.Value?.ToString() ?? "";
-                Tb_price.Text = dgv_Return.CurrentRow.Cells["Unit_Price"]?.Value?.ToString() ?? "";
+              
                 TB_Order_Quntity.Text = dgv_Return.CurrentRow.Cells["Quantity"]?.Value?.ToString() ?? "";
                 Tb_price_Total.Text = dgv_Return.CurrentRow.Cells["Total_Amount"]?.Value?.ToString() ?? "";
             }
@@ -94,15 +94,21 @@ namespace Motors_System.Forms
 
                 int salesId = int.Parse(TB_Order_Id.Text);
                 int returnQuantity = int.Parse(TB_Order_Quntity.Text);
+                string motorModel = TB_Motor_Name.Text;
 
                 using (SqlConnection con = new SqlConnection(connectionString))
                 {
                     con.Open();
 
-                    // ✅ 1- نجيب الكمية الحالية
-                    string getQuantityQuery = "SELECT Quantity, Unit_Price FROM Sales WHERE Sales_ID = @Sales_ID";
+                    // ✅ 1- نجيب الكمية الحالية والسعر و MotorId
+                    string getQuantityQuery = @"
+                SELECT Quantity, Unit_Price, Motor_ID 
+                FROM Sales 
+                WHERE Sales_ID = @Sales_ID";
+
                     int currentQuantity = 0;
                     decimal unitPrice = 0;
+                    int motorId = 0;
 
                     using (SqlCommand cmd = new SqlCommand(getQuantityQuery, con))
                     {
@@ -113,6 +119,7 @@ namespace Motors_System.Forms
                             {
                                 currentQuantity = Convert.ToInt32(dr["Quantity"]);
                                 unitPrice = Convert.ToDecimal(dr["Unit_Price"]);
+                                motorId = Convert.ToInt32(dr["Motor_ID"]);
                             }
                         }
                     }
@@ -134,14 +141,14 @@ namespace Motors_System.Forms
                     {
                         // ✅ 2- إدخال المرتجع
                         string insertReturnQuery = @"
-                            INSERT INTO Returns (Sales_ID, Return_Date, Customer_Name, Motor_Model, Returned_Quantity, Return_Amount)
-                            VALUES (@Sales_ID, @Return_Date, @Customer_Name, @Motor_Model, @Returned_Quantity, @Return_Amount)";
+                    INSERT INTO Returns (Sales_ID, Return_Date, Customer_Name, Motor_Model, Returned_Quantity, Return_Amount)
+                    VALUES (@Sales_ID, @Return_Date, @Customer_Name, @Motor_Model, @Returned_Quantity, @Return_Amount)";
                         using (SqlCommand cmd = new SqlCommand(insertReturnQuery, con, transaction))
                         {
                             cmd.Parameters.AddWithValue("@Sales_ID", salesId);
                             cmd.Parameters.AddWithValue("@Return_Date", DateTime.Now);
                             cmd.Parameters.AddWithValue("@Customer_Name", TB_Custmor_name.Text);
-                            cmd.Parameters.AddWithValue("@Motor_Model", TB_Motor_Name.Text);
+                            cmd.Parameters.AddWithValue("@Motor_Model", motorModel);
                             cmd.Parameters.AddWithValue("@Returned_Quantity", returnQuantity);
                             cmd.Parameters.AddWithValue("@Return_Amount", returnQuantity * unitPrice);
                             cmd.ExecuteNonQuery();
@@ -149,10 +156,10 @@ namespace Motors_System.Forms
 
                         // ✅ 3- تحديث المبيعات
                         string updateSalesQuery = @"
-                            UPDATE Sales 
-                            SET Quantity = Quantity - @Returned_Quantity,
-                                Total_Amount = (Quantity - @Returned_Quantity) * Unit_Price
-                            WHERE Sales_ID = @Sales_ID";
+                    UPDATE Sales 
+                    SET Quantity = Quantity - @Returned_Quantity,
+                        Total_Amount = (Quantity - @Returned_Quantity) * Unit_Price
+                    WHERE Sales_ID = @Sales_ID";
                         using (SqlCommand cmd = new SqlCommand(updateSalesQuery, con, transaction))
                         {
                             cmd.Parameters.AddWithValue("@Returned_Quantity", returnQuantity);
@@ -160,13 +167,24 @@ namespace Motors_System.Forms
                             cmd.ExecuteNonQuery();
                         }
 
+                        // ✅ 4- تحديث المخزن (Motors)
+                        string updateMotorsQuery = @"
+                    UPDATE Motors
+                    SET StockQuantity = StockQuantity + @Returned_Quantity
+                    WHERE MotorId = @MotorId";
+                        using (SqlCommand cmd = new SqlCommand(updateMotorsQuery, con, transaction))
+                        {
+                            cmd.Parameters.AddWithValue("@Returned_Quantity", returnQuantity);
+                            cmd.Parameters.AddWithValue("@MotorId", motorId);
+                            cmd.ExecuteNonQuery();
+                        }
+
                         transaction.Commit();
 
-                        MessageBox.Show("تم تسجيل المرتجع بنجاح.", "نجاح", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("تم تسجيل المرتجع وإضافة الكمية للمخزن بنجاح.", "نجاح", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         // ✅ تحديث الداتا جريد
                         LoadSalesData();
-                        RemoveZeroRows();
 
                         // ✅ تفريغ التيكست بوكسات
                         ClearSelectionFields();
@@ -184,48 +202,8 @@ namespace Motors_System.Forms
             }
         }
 
-        private void RemoveZeroRows()
-        {
-            // ✅ أسهل حل: Reload مع فلترة مباشرة
-            List<Sales> updatedList = new List<Sales>();
 
-            using (SqlConnection con = new SqlConnection(connectionString))
-            {
-                string query = "SELECT * FROM Sales WHERE Quantity > 0";
-                SqlCommand cmd = new SqlCommand(query, con);
 
-                try
-                {
-                    con.Open();
-                    using (SqlDataReader dr = cmd.ExecuteReader())
-                    {
-                        while (dr.Read())
-                        {
-                            updatedList.Add(new Sales
-                            {
-                                Sales_ID = Convert.ToInt32(dr["Sales_ID"]),
-                                Sales_Date = Convert.ToDateTime(dr["Sales_Date"]),
-                                User = dr["User"].ToString(),
-                                Customer_Name = dr["Customer_Name"].ToString(),
-                                Customer_Contact = dr["Customer_Contact"].ToString(),
-                                Motor_ID = dr["Motor_ID"].ToString(),
-                                Motor_Model = dr["Motor_Model"].ToString(),
-                                Unit_Price = Convert.ToDecimal(dr["Unit_Price"]),
-                                Quantity = Convert.ToInt32(dr["Quantity"]),
-                                Total_Amount = Convert.ToDecimal(dr["Total_Amount"])
-                            });
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("خطأ أثناء تحديث البيانات: " + ex.Message);
-                }
-            }
-
-            dgv_Return.DataSource = null;
-            dgv_Return.DataSource = updatedList;
-        }
 
         private void ClearSelectionFields()
         {
@@ -235,9 +213,45 @@ namespace Motors_System.Forms
             TB_Custmor_name.Clear();
             Tb_Contact.Clear();
             TB_Motor_Name.Clear();
-            Tb_price.Clear();
             TB_Order_Quntity.Clear();
             Tb_price_Total.Clear();
+        }
+
+        private void btn_ShowSalesFromDate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DateTime fromDate = dtp_FromDate.Value.Date; 
+
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    string query = @"
+                SELECT SUM(Total_Amount) 
+                FROM Sales 
+                WHERE Sales_Date >= @FromDate";
+
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@FromDate", fromDate);
+
+                        con.Open();
+                        object result = cmd.ExecuteScalar();
+
+                        decimal totalSales = (result != DBNull.Value) ? Convert.ToDecimal(result) : 0;
+
+                        MessageBox.Show(
+                            $"إجمالي المبيعات من {fromDate.ToShortDateString()} لحد دلوقتي = {totalSales} جنيه",
+                            "إجمالي المبيعات",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information
+                        );
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("خطأ أثناء حساب المبيعات: " + ex.Message, "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

@@ -63,6 +63,14 @@ namespace Motors_System.Forms
                                 motors.Add(motor);
                             }
                             Motor_DGV.DataSource = motors;
+                            Motor_DGV.Columns["MotorId"].HeaderText = "رقم المحرك";
+                            Motor_DGV.Columns["MotorName"].HeaderText = "اسم المحرك";
+                            Motor_DGV.Columns["Power"].HeaderText = "القوة";
+                            Motor_DGV.Columns["Price"].HeaderText = "السعر";
+                            Motor_DGV.Columns["StockQuantity"].HeaderText = "الكمية المتوفرة";
+
+                            // تعديل حجم الأعمدة تلقائيًا
+                            Motor_DGV.AutoResizeColumns();
                         }
                     }
                 }

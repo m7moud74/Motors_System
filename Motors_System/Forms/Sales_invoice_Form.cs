@@ -105,12 +105,7 @@ namespace Motors_System.Forms
                 TB_Employee_Id.Clear();
             }
 
-            if (Tb_Salary_1 != null)
-            {
-                Tb_Salary_1.ReadOnly = true;
-                Tb_Salary_1.BackColor = System.Drawing.SystemColors.Control;
-                Tb_Salary_1.Text = "0.00";
-            }
+          
 
             if (Tb_Salary_Total != null)
             {
@@ -242,6 +237,18 @@ namespace Motors_System.Forms
                 MessageBox.Show("برجاء اختيار أو إدخال اسم العميل", "تحذير", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            if (string.IsNullOrWhiteSpace(TB_Employee_Id.Text))
+{
+    MessageBox.Show("برجاء إدخال معرف الموظف", "تحذير", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+    return;
+}
+
+
+if (!IsValidEmployee(TB_Employee_Id.Text))
+{
+    MessageBox.Show("معرف الموظف غير موجود في النظام", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+    return;
+}
 
             if (string.IsNullOrWhiteSpace(TB_Motor_Name.Text))
             {
@@ -314,10 +321,10 @@ namespace Motors_System.Forms
 
             UpdateTotalAmount();
 
-            TB_Custmor_name.Text = "";
-            TB_OrderDetails.Clear();
-
+            ClearSelectionFields();
             MessageBox.Show("تمت إضافة المحرك بنجاح", "نجح", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
         }
 
         private void Btn_delete_Motor_before_selll_Click(object sender, EventArgs e)
@@ -342,6 +349,7 @@ namespace Motors_System.Forms
                 dataGridView1.Rows.Remove(dataGridView1.CurrentRow);
 
                 UpdateTotalAmount();
+                ClearSelectionFields();
 
                 MessageBox.Show("تم الحذف بنجاح", "نجح", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -383,6 +391,7 @@ namespace Motors_System.Forms
             dataGridView1.CurrentRow.Cells["Total_Amount"].Value = salesItems[rowIndex].Total_Amount.ToString("0.00");
 
             UpdateTotalAmount();
+            ClearSelectionFields();
 
             MessageBox.Show("تم التعديل بنجاح", "نجح", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -482,6 +491,29 @@ namespace Motors_System.Forms
                 }
             }
         }
+        private bool IsValidEmployee(string employeeId)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    con.Open();
+                    string query = "SELECT COUNT(*) FROM Users WHERE UserId = @id";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@id", employeeId.Trim());
+                        int count = (int)cmd.ExecuteScalar();
+                        return count > 0; // لو موجود بيرجع true
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("خطأ في التحقق من الموظف: " + ex.Message, "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+        }
+
 
         private void ClearForm()
         {
@@ -491,7 +523,7 @@ namespace Motors_System.Forms
             TB_Custmor_name.Text = "";
             TB_OrderDetails.Clear();
             TB_Employee_Id.Clear();
-            if (Tb_Salary_1 != null) Tb_Salary_1.Text = "0.00";
+          
             Tb_Salary_Total.Text = "0.00";
             totalAmount = 0m;
 
@@ -501,8 +533,14 @@ namespace Motors_System.Forms
            
         }
 
-   
+        private void ClearSelectionFields()
+        {
+            
+            TB_Motor_Name.Clear();
+            TB_OrderDetails.Clear();
+        }
 
-  
+
+
     }
 }

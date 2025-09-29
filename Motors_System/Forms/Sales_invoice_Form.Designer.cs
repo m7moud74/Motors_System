@@ -37,9 +37,7 @@
             this.TB_Employee_Id = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.TB_OrderDetails = new System.Windows.Forms.TextBox();
-            this.Tb_Salary_1 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.Tb_Salary_Total = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -128,15 +126,6 @@
             this.label6.TabIndex = 11;
             this.label6.Text = "المحرك";
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(753, 197);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(43, 17);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "السعر";
-            // 
             // TB_OrderDetails
             // 
             this.TB_OrderDetails.Location = new System.Drawing.Point(618, 164);
@@ -144,17 +133,10 @@
             this.TB_OrderDetails.Size = new System.Drawing.Size(100, 24);
             this.TB_OrderDetails.TabIndex = 14;
             // 
-            // Tb_Salary_1
-            // 
-            this.Tb_Salary_1.Location = new System.Drawing.Point(618, 197);
-            this.Tb_Salary_1.Name = "Tb_Salary_1";
-            this.Tb_Salary_1.Size = new System.Drawing.Size(100, 24);
-            this.Tb_Salary_1.TabIndex = 15;
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(724, 234);
+            this.label8.Location = new System.Drawing.Point(724, 204);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(80, 17);
             this.label8.TabIndex = 16;
@@ -162,7 +144,7 @@
             // 
             // Tb_Salary_Total
             // 
-            this.Tb_Salary_Total.Location = new System.Drawing.Point(618, 234);
+            this.Tb_Salary_Total.Location = new System.Drawing.Point(618, 204);
             this.Tb_Salary_Total.Name = "Tb_Salary_Total";
             this.Tb_Salary_Total.Size = new System.Drawing.Size(100, 24);
             this.Tb_Salary_Total.TabIndex = 17;
@@ -256,9 +238,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.Tb_Salary_Total);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.Tb_Salary_1);
             this.Controls.Add(this.TB_OrderDetails);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.TB_Employee_Id);
@@ -287,9 +267,7 @@
         private System.Windows.Forms.TextBox TB_Employee_Id;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox TB_OrderDetails;
-        private System.Windows.Forms.TextBox Tb_Salary_1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox Tb_Salary_Total;
         private System.Windows.Forms.DataGridView dataGridView1;
