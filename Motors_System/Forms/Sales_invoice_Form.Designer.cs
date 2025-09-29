@@ -48,8 +48,8 @@
             this.btn_add_Motor_To_sell = new System.Windows.Forms.Button();
             this.Btn_Update_Motor_To_sell = new System.Windows.Forms.Button();
             this.Btn_delete_Motor_before_selll = new System.Windows.Forms.Button();
-            this.CB_Customer_Name = new System.Windows.Forms.ComboBox();
-            this.CB_Motor_Name = new System.Windows.Forms.ComboBox();
+            this.TB_Custmor_name = new System.Windows.Forms.TextBox();
+            this.TB_Motor_Name = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -227,29 +227,27 @@
             this.Btn_delete_Motor_before_selll.UseVisualStyleBackColor = true;
             this.Btn_delete_Motor_before_selll.Click += new System.EventHandler(this.Btn_delete_Motor_before_selll_Click);
             // 
-            // CB_Customer_Name
+            // TB_Custmor_name
             // 
-            this.CB_Customer_Name.FormattingEnabled = true;
-            this.CB_Customer_Name.Location = new System.Drawing.Point(597, 39);
-            this.CB_Customer_Name.Name = "CB_Customer_Name";
-            this.CB_Customer_Name.Size = new System.Drawing.Size(121, 24);
-            this.CB_Customer_Name.TabIndex = 24;
+            this.TB_Custmor_name.Location = new System.Drawing.Point(618, 40);
+            this.TB_Custmor_name.Name = "TB_Custmor_name";
+            this.TB_Custmor_name.Size = new System.Drawing.Size(100, 24);
+            this.TB_Custmor_name.TabIndex = 24;
             // 
-            // CB_Motor_Name
+            // TB_Motor_Name
             // 
-            this.CB_Motor_Name.FormattingEnabled = true;
-            this.CB_Motor_Name.Location = new System.Drawing.Point(597, 133);
-            this.CB_Motor_Name.Name = "CB_Motor_Name";
-            this.CB_Motor_Name.Size = new System.Drawing.Size(121, 24);
-            this.CB_Motor_Name.TabIndex = 25;
+            this.TB_Motor_Name.Location = new System.Drawing.Point(618, 131);
+            this.TB_Motor_Name.Name = "TB_Motor_Name";
+            this.TB_Motor_Name.Size = new System.Drawing.Size(100, 24);
+            this.TB_Motor_Name.TabIndex = 25;
             // 
             // Sales_invoice_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1262, 504);
-            this.Controls.Add(this.CB_Motor_Name);
-            this.Controls.Add(this.CB_Customer_Name);
+            this.Controls.Add(this.TB_Motor_Name);
+            this.Controls.Add(this.TB_Custmor_name);
             this.Controls.Add(this.Btn_delete_Motor_before_selll);
             this.Controls.Add(this.Btn_Update_Motor_To_sell);
             this.Controls.Add(this.btn_add_Motor_To_sell);
@@ -300,7 +298,7 @@
         private System.Windows.Forms.Button btn_add_Motor_To_sell;
         private System.Windows.Forms.Button Btn_Update_Motor_To_sell;
         private System.Windows.Forms.Button Btn_delete_Motor_before_selll;
-        private System.Windows.Forms.ComboBox CB_Customer_Name;
-        private System.Windows.Forms.ComboBox CB_Motor_Name;
+        private System.Windows.Forms.TextBox TB_Custmor_name;
+        private System.Windows.Forms.TextBox TB_Motor_Name;
     }
 }

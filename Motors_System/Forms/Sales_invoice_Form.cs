@@ -23,9 +23,64 @@ namespace Motors_System.Forms
         {
             SetupDataGrid();
             SetupControls();
-            SetupComboBoxes();
-            LoadCustomersToComboBox();
-            LoadMotorsToComboBox();
+            SetupAutoCompleteForCustomers();
+            SetupAutoCompleteForMotors();
+        }
+        private void SetupAutoCompleteForCustomers()
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    con.Open();
+                    string query = "SELECT DISTINCT FullName FROM Customers ORDER BY FullName";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        AutoCompleteStringCollection customers = new AutoCompleteStringCollection();
+                        while (dr.Read())
+                        {
+                            customers.Add(dr["FullName"].ToString());
+                        }
+
+                        TB_Custmor_name.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                        TB_Custmor_name.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                        TB_Custmor_name.AutoCompleteCustomSource = customers;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("خطأ في تحميل العملاء: " + ex.Message, "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        private void SetupAutoCompleteForMotors()
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    con.Open();
+                    string query = "SELECT DISTINCT MotorName FROM Motors WHERE StockQuantity > 0 ORDER BY MotorName";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    using (SqlDataReader dr = cmd.ExecuteReader())
+                    {
+                        AutoCompleteStringCollection motors = new AutoCompleteStringCollection();
+                        while (dr.Read())
+                        {
+                            motors.Add(dr["MotorName"].ToString());
+                        }
+
+                        TB_Motor_Name.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                        TB_Motor_Name.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                        TB_Motor_Name.AutoCompleteCustomSource = motors;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("خطأ في تحميل المحركات: " + ex.Message, "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void SetupControls()
@@ -65,24 +120,7 @@ namespace Motors_System.Forms
             }
         }
 
-        private void SetupComboBoxes()
-        {
-            if (CB_Customer_Name != null)
-            {
-                CB_Customer_Name.DropDownStyle = ComboBoxStyle.DropDown;
-                CB_Customer_Name.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                CB_Customer_Name.AutoCompleteSource = AutoCompleteSource.ListItems;
-                CB_Customer_Name.TextChanged += CB_Customer_Name_TextChanged;
-            }
-
-            if (CB_Motor_Name != null)
-            {
-                CB_Motor_Name.DropDownStyle = ComboBoxStyle.DropDown;
-                CB_Motor_Name.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-                CB_Motor_Name.AutoCompleteSource = AutoCompleteSource.ListItems;
-                CB_Motor_Name.SelectedIndexChanged += CB_Motor_Name_SelectedIndexChanged;
-            }
-        }
+      
 
         private void SetupDataGrid()
         {
@@ -111,70 +149,10 @@ namespace Motors_System.Forms
             dataGridView1.MultiSelect = false;
         }
 
-        private void LoadCustomersToComboBox()
-        {
-            using (SqlConnection con = new SqlConnection(connectionString))
-            {
-                try
-                {
-                    con.Open();
-                    string query = "SELECT DISTINCT FullName FROM Customers ORDER BY FullName";
-                    using (SqlCommand cmd = new SqlCommand(query, con))
-                    using (SqlDataReader dr = cmd.ExecuteReader())
-                    {
-                        CB_Customer_Name.Items.Clear();
-                        while (dr.Read())
-                        {
-                            CB_Customer_Name.Items.Add(dr["FullName"].ToString());
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("خطأ في تحميل العملاء: " + ex.Message, "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
+       
 
-        private void LoadMotorsToComboBox()
-        {
-            using (SqlConnection con = new SqlConnection(connectionString))
-            {
-                try
-                {
-                    con.Open();
-                    string query = "SELECT DISTINCT MotorName FROM Motors WHERE StockQuantity > 0 ORDER BY MotorName";
-                    using (SqlCommand cmd = new SqlCommand(query, con))
-                    using (SqlDataReader dr = cmd.ExecuteReader())
-                    {
-                        CB_Motor_Name.Items.Clear();
-                        while (dr.Read())
-                        {
-                            CB_Motor_Name.Items.Add(dr["MotorName"].ToString());
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("خطأ في تحميل المحركات: " + ex.Message, "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
 
-        private void CB_Motor_Name_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(CB_Motor_Name.Text))
-            {
-                var motor = GetMotorByName(CB_Motor_Name.Text);
-                if (motor.MotorId != -1)
-                {
-                    if (Tb_Salary_1 != null)
-                    {
-                        Tb_Salary_1.Text = motor.Price.ToString("0.00");
-                    }
-                }
-            }
-        }
+
 
         private string GetCustomerContact(string customerName)
         {
@@ -259,13 +237,13 @@ namespace Motors_System.Forms
 
         private void btn_add_Motor_To_sell_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(CB_Customer_Name.Text))
+            if (string.IsNullOrWhiteSpace(TB_Custmor_name.Text))
             {
                 MessageBox.Show("برجاء اختيار أو إدخال اسم العميل", "تحذير", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(CB_Motor_Name.Text))
+            if (string.IsNullOrWhiteSpace(TB_Motor_Name.Text))
             {
                 MessageBox.Show("برجاء اختيار اسم المحرك", "تحذير", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -283,7 +261,7 @@ namespace Motors_System.Forms
                 return;
             }
 
-            var motor = GetMotorByName(CB_Motor_Name.Text);
+            var motor = GetMotorByName(TB_Motor_Name.Text);
             if (motor.MotorId == -1)
             {
                 MessageBox.Show("المحرك غير موجود", "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -311,10 +289,10 @@ namespace Motors_System.Forms
             {
                 Sales_ID = salesItems.Count + 1,
                 Sales_Date = DateTime.Now,
-                Customer_Name = CB_Customer_Name.Text.Trim(),
-                Customer_Contact = GetCustomerContact(CB_Customer_Name.Text.Trim()),
+                Customer_Name = TB_Custmor_name.Text.Trim(),
+                Customer_Contact = GetCustomerContact(TB_Custmor_name.Text.Trim()),
                 Motor_ID = motor.MotorId.ToString(),
-                Motor_Model = CB_Motor_Name.Text.Trim(),
+                Motor_Model = TB_Motor_Name.Text.Trim(),
                 Unit_Price = motor.Price,
                 Quantity = quantity,
                 Total_Amount = motor.Price * quantity
@@ -336,7 +314,7 @@ namespace Motors_System.Forms
 
             UpdateTotalAmount();
 
-            CB_Motor_Name.Text = "";
+            TB_Custmor_name.Text = "";
             TB_OrderDetails.Clear();
 
             MessageBox.Show("تمت إضافة المحرك بنجاح", "نجح", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -392,24 +370,19 @@ namespace Motors_System.Forms
             int rowIndex = dataGridView1.CurrentRow.Index;
             if (rowIndex >= salesItems.Count) return;
 
-            var motor = GetMotorByName(salesItems[rowIndex].Motor_Model);
-            if (motor.StockQuantity < quantity)
-            {
-                MessageBox.Show($"الكمية المطلوبة ({quantity}) أكبر من المتاح في المخزن ({motor.StockQuantity})",
-                               "تحذير", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
+            // تحديث بيانات العميل والموتور من التكست بوكس
+            salesItems[rowIndex].Customer_Name = TB_Custmor_name.Text.Trim();
+            salesItems[rowIndex].Motor_Model = TB_Motor_Name.Text.Trim();
             salesItems[rowIndex].Quantity = quantity;
             salesItems[rowIndex].Total_Amount = salesItems[rowIndex].Unit_Price * quantity;
 
+            // تحديث الجريد
+            dataGridView1.CurrentRow.Cells["Customer_Name"].Value = salesItems[rowIndex].Customer_Name;
+            dataGridView1.CurrentRow.Cells["Motor_Model"].Value = salesItems[rowIndex].Motor_Model;
             dataGridView1.CurrentRow.Cells["Quantity"].Value = quantity;
             dataGridView1.CurrentRow.Cells["Total_Amount"].Value = salesItems[rowIndex].Total_Amount.ToString("0.00");
 
             UpdateTotalAmount();
-
-            CB_Motor_Name.Text = "";
-            TB_OrderDetails.Clear();
 
             MessageBox.Show("تم التعديل بنجاح", "نجح", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -429,8 +402,8 @@ namespace Motors_System.Forms
             if (dataGridView1.CurrentRow != null && dataGridView1.CurrentRow.Index < salesItems.Count)
             {
                 var selectedSale = salesItems[dataGridView1.CurrentRow.Index];
-                CB_Customer_Name.Text = selectedSale.Customer_Name;
-                CB_Motor_Name.Text = selectedSale.Motor_Model;
+                TB_Custmor_name.Text = selectedSale.Customer_Name;
+                TB_Motor_Name.Text = selectedSale.Motor_Model;
                 TB_OrderDetails.Text = selectedSale.Quantity.ToString();
             }
         }
@@ -514,8 +487,8 @@ namespace Motors_System.Forms
         {
             salesItems.Clear();
             dataGridView1.Rows.Clear();
-            CB_Customer_Name.Text = "";
-            CB_Motor_Name.Text = "";
+            TB_Custmor_name.Text = "";
+            TB_Custmor_name.Text = "";
             TB_OrderDetails.Clear();
             TB_Employee_Id.Clear();
             if (Tb_Salary_1 != null) Tb_Salary_1.Text = "0.00";
@@ -525,41 +498,11 @@ namespace Motors_System.Forms
             if (TB_Order_Id != null) TB_Order_Id.Text = "ORD" + DateTime.Now.ToString("yyyyMMddHHmmss");
             if (TB_Motor_Date != null) TB_Motor_Date.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
 
-            LoadMotorsToComboBox();
+           
         }
 
-        private void CB_Customer_Name_TextChanged(object sender, EventArgs e)
-        {
-            ComboBox cb = sender as ComboBox;
-            if (cb != null && cb.Text.Length >= 2)
-            {
-                SearchCustomers(cb.Text);
-            }
-        }
+   
 
-        private void SearchCustomers(string searchText)
-        {
-            using (SqlConnection con = new SqlConnection(connectionString))
-            {
-                try
-                {
-                    con.Open();
-                    string query = "SELECT DISTINCT FullName FROM Customers WHERE FullName LIKE @search ORDER BY FullName";
-                    using (SqlCommand cmd = new SqlCommand(query, con))
-                    {
-                        cmd.Parameters.AddWithValue("@search", "%" + searchText + "%");
-                        using (SqlDataReader dr = cmd.ExecuteReader())
-                        {
-                            CB_Customer_Name.Items.Clear();
-                            while (dr.Read())
-                            {
-                                CB_Customer_Name.Items.Add(dr["FullName"].ToString());
-                            }
-                        }
-                    }
-                }
-                catch { }
-            }
-        }
+  
     }
 }
