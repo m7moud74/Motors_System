@@ -32,6 +32,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.Go_returns_btn = new System.Windows.Forms.Button();
             this.Go_Users_btn = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -74,17 +75,29 @@
             this.Go_Users_btn.UseVisualStyleBackColor = true;
             this.Go_Users_btn.Click += new System.EventHandler(this.Go_Users_btn_Click);
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(174, 253);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(155, 23);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "الحجات الي رجعت";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(700, 450);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.Go_Users_btn);
             this.Controls.Add(this.Go_returns_btn);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Name = "MainForm";
             this.Text = "MainForm";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
 
         }
@@ -95,5 +108,6 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button Go_returns_btn;
         private System.Windows.Forms.Button Go_Users_btn;
+        private System.Windows.Forms.Button button3;
     }
 }

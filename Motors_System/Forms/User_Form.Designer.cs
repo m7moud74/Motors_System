@@ -36,7 +36,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.Tb_name = new System.Windows.Forms.TextBox();
             this.Tb_pass = new System.Windows.Forms.TextBox();
-            this.Tb_Role = new System.Windows.Forms.TextBox();
+            this.Btn_add = new System.Windows.Forms.Button();
+            this.Btn_edit = new System.Windows.Forms.Button();
+            this.Btn_delete = new System.Windows.Forms.Button();
+            this.Cb_Role = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.User_DGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -107,19 +110,53 @@
             this.Tb_pass.Size = new System.Drawing.Size(100, 24);
             this.Tb_pass.TabIndex = 7;
             // 
-            // Tb_Role
+            // Btn_add
             // 
-            this.Tb_Role.Location = new System.Drawing.Point(984, 111);
-            this.Tb_Role.Name = "Tb_Role";
-            this.Tb_Role.Size = new System.Drawing.Size(100, 24);
-            this.Tb_Role.TabIndex = 8;
+            this.Btn_add.Location = new System.Drawing.Point(841, 437);
+            this.Btn_add.Name = "Btn_add";
+            this.Btn_add.Size = new System.Drawing.Size(75, 23);
+            this.Btn_add.TabIndex = 9;
+            this.Btn_add.Text = "اضافه";
+            this.Btn_add.UseVisualStyleBackColor = true;
+            this.Btn_add.Click += new System.EventHandler(this.Btn_add_Click);
+            // 
+            // Btn_edit
+            // 
+            this.Btn_edit.Location = new System.Drawing.Point(710, 437);
+            this.Btn_edit.Name = "Btn_edit";
+            this.Btn_edit.Size = new System.Drawing.Size(75, 23);
+            this.Btn_edit.TabIndex = 11;
+            this.Btn_edit.Text = "تعديل";
+            this.Btn_edit.UseVisualStyleBackColor = true;
+            this.Btn_edit.Click += new System.EventHandler(this.Btn_edit_Click);
+            // 
+            // Btn_delete
+            // 
+            this.Btn_delete.Location = new System.Drawing.Point(568, 437);
+            this.Btn_delete.Name = "Btn_delete";
+            this.Btn_delete.Size = new System.Drawing.Size(75, 23);
+            this.Btn_delete.TabIndex = 12;
+            this.Btn_delete.Text = "حذف";
+            this.Btn_delete.UseVisualStyleBackColor = true;
+            this.Btn_delete.Click += new System.EventHandler(this.Btn_delete_Click);
+            // 
+            // Cb_Role
+            // 
+            this.Cb_Role.FormattingEnabled = true;
+            this.Cb_Role.Location = new System.Drawing.Point(963, 111);
+            this.Cb_Role.Name = "Cb_Role";
+            this.Cb_Role.Size = new System.Drawing.Size(121, 24);
+            this.Cb_Role.TabIndex = 13;
             // 
             // User_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1186, 505);
-            this.Controls.Add(this.Tb_Role);
+            this.Controls.Add(this.Cb_Role);
+            this.Controls.Add(this.Btn_delete);
+            this.Controls.Add(this.Btn_edit);
+            this.Controls.Add(this.Btn_add);
             this.Controls.Add(this.Tb_pass);
             this.Controls.Add(this.Tb_name);
             this.Controls.Add(this.label4);
@@ -147,6 +184,9 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox Tb_name;
         private System.Windows.Forms.TextBox Tb_pass;
-        private System.Windows.Forms.TextBox Tb_Role;
+        private System.Windows.Forms.Button Btn_add;
+        private System.Windows.Forms.Button Btn_edit;
+        private System.Windows.Forms.Button Btn_delete;
+        private System.Windows.Forms.ComboBox Cb_Role;
     }
 }
