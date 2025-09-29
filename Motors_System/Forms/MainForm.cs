@@ -32,5 +32,12 @@ namespace Motors_System.Forms
             sales_Invoice_Form.Show();
             this.Hide();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Returns returns = new Returns();
+            returns.Show();
+            this.Hide();
+        }
     }
 }
