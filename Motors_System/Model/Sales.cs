@@ -10,6 +10,7 @@ namespace Motors_System.Model
     {
         public int Sales_ID { get; set; }
         public DateTime Sales_Date { get; set; }
+       public string User { get; set; }
         public string Customer_Name { get; set; }
         public string Customer_Contact { get; set; }
         public string Motor_ID { get; set; }

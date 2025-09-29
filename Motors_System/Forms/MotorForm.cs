@@ -19,6 +19,7 @@ namespace Motors_System.Forms
 
         private void MotorForm_Load(object sender, EventArgs e)
         {
+            TB_Motor_Id.Enabled = false;
             FillData();
         }
 
@@ -53,11 +54,11 @@ namespace Motors_System.Forms
                                 {
                                     MotorId = Convert.ToInt32(dr["MotorId"]),
                                     MotorName = dr["MotorName"].ToString(),
-                                    Description = dr["Description"].ToString(),
+                                    
                                     Power = Convert.ToDecimal(dr["Power"]),
                                     Price = Convert.ToDecimal(dr["Price"]),
                                     StockQuantity = dr["StockQuantity"] != DBNull.Value ? Convert.ToInt32(dr["StockQuantity"]) : (int?)null,
-                                    Category_id = Convert.ToInt32(dr["CategoryId"])
+                                 
                                 };
                                 motors.Add(motor);
                             }
@@ -90,16 +91,16 @@ namespace Motors_System.Forms
                 try
                 {
                     con.Open();
-                    string query = "INSERT INTO Motors (MotorName, Description, Power, Price, StockQuantity, CategoryId) VALUES (@name, @desc, @power, @price, @stock, @cat)";
+                    string query = "INSERT INTO Motors (MotorName, Power, Price, StockQuantity) VALUES (@name,@power, @price, @stock)";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
                         cmd.Parameters.AddWithValue("@name", Tb_Motor_Name.Text.Trim());
-                        cmd.Parameters.AddWithValue("@desc", Tb_Motor_Decs.Text.Trim());
+                      
                         cmd.Parameters.AddWithValue("@power", decimal.Parse(Tb_Motor_Power.Text));
                         cmd.Parameters.AddWithValue("@price", decimal.Parse(Tb_Motor_Price.Text));
                         cmd.Parameters.AddWithValue("@stock", int.Parse(Tb_Motor_Quntity.Text));
-                        cmd.Parameters.AddWithValue("@cat", int.Parse(Tb_Motor_Category_Id.Text));
+                       
 
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("تمت الإضافة بنجاح ✅", "نجح", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -134,17 +135,17 @@ namespace Motors_System.Forms
                 {
                     int id = (int)Motor_DGV.CurrentRow.Cells["MotorId"].Value;
                     con.Open();
-                    string query = "UPDATE Motors SET MotorName=@name, Description=@desc, Power=@power, Price=@price, StockQuantity=@stock, CategoryId=@cat WHERE MotorId=@id";
+                    string query = "UPDATE Motors SET MotorName=@name, Power=@power, Price=@price, StockQuantity=@stock WHERE MotorId=@id";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
                         cmd.Parameters.AddWithValue("@id", id);
                         cmd.Parameters.AddWithValue("@name", Tb_Motor_Name.Text.Trim());
-                        cmd.Parameters.AddWithValue("@desc", Tb_Motor_Decs.Text.Trim());
+                      
                         cmd.Parameters.AddWithValue("@power", decimal.Parse(Tb_Motor_Power.Text));
                         cmd.Parameters.AddWithValue("@price", decimal.Parse(Tb_Motor_Price.Text));
                         cmd.Parameters.AddWithValue("@stock", int.Parse(Tb_Motor_Quntity.Text));
-                        cmd.Parameters.AddWithValue("@cat", int.Parse(Tb_Motor_Category_Id.Text));
+                   
 
                         int rowsAffected = cmd.ExecuteNonQuery();
                         if (rowsAffected > 0)
@@ -224,8 +225,7 @@ namespace Motors_System.Forms
             if (!int.TryParse(Tb_Motor_Quntity.Text, out _))
                 return false;
 
-            if (!int.TryParse(Tb_Motor_Category_Id.Text, out _))
-                return false;
+          
 
             return true;
         }
@@ -233,11 +233,11 @@ namespace Motors_System.Forms
         private void ClearInputFields()
         {
             Tb_Motor_Name.Clear();
-            Tb_Motor_Decs.Clear();
+          
             Tb_Motor_Power.Clear();
             Tb_Motor_Price.Clear();
             Tb_Motor_Quntity.Clear();
-            Tb_Motor_Category_Id.Clear();
+       
         }
 
         private void BTN_to_bk_home_Click(object sender, EventArgs e)
@@ -258,14 +258,18 @@ namespace Motors_System.Forms
             {
                 TB_Motor_Id.Text = Motor_DGV.CurrentRow.Cells["MotorId"].Value?.ToString() ?? "";
                 Tb_Motor_Name.Text = Motor_DGV.CurrentRow.Cells["MotorName"].Value?.ToString() ?? "";
-                Tb_Motor_Decs.Text = Motor_DGV.CurrentRow.Cells["Description"].Value?.ToString() ?? "";
                 Tb_Motor_Power.Text = Motor_DGV.CurrentRow.Cells["Power"].Value?.ToString() ?? "";
                 Tb_Motor_Price.Text = Motor_DGV.CurrentRow.Cells["Price"].Value?.ToString() ?? "";
                 Tb_Motor_Quntity.Text = Motor_DGV.CurrentRow.Cells["StockQuantity"].Value?.ToString() ?? "";
-                Tb_Motor_Category_Id.Text = Motor_DGV.CurrentRow.Cells["Category_id"].Value?.ToString() ?? "";
+              
             }
         }
 
-     
+        private void TB_Motor_Id_TextChanged(object sender, EventArgs e)
+        {
+            
+
+
+        }
     }
 }

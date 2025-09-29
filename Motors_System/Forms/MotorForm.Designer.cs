@@ -34,15 +34,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.TB_Motor_Id = new System.Windows.Forms.TextBox();
             this.Tb_Motor_Name = new System.Windows.Forms.TextBox();
-            this.Tb_Motor_Category_Id = new System.Windows.Forms.TextBox();
             this.Tb_Motor_Quntity = new System.Windows.Forms.TextBox();
             this.Tb_Motor_Price = new System.Windows.Forms.TextBox();
             this.Tb_Motor_Power = new System.Windows.Forms.TextBox();
-            this.Tb_Motor_Decs = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.Tb_Motor_search = new System.Windows.Forms.TextBox();
             this.BTN_Add = new System.Windows.Forms.Button();
@@ -85,7 +81,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1312, 151);
+            this.label3.Location = new System.Drawing.Point(1312, 133);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 17);
             this.label3.TabIndex = 3;
@@ -94,7 +90,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1313, 123);
+            this.label4.Location = new System.Drawing.Point(1316, 99);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 17);
             this.label4.TabIndex = 4;
@@ -103,20 +99,11 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(1322, 96);
+            this.label5.Location = new System.Drawing.Point(1321, 66);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 17);
             this.label5.TabIndex = 5;
             this.label5.Text = "القوه";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(1312, 63);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(45, 17);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "الشرح";
             // 
             // TB_Motor_Id
             // 
@@ -124,7 +111,7 @@
             this.TB_Motor_Id.Name = "TB_Motor_Id";
             this.TB_Motor_Id.Size = new System.Drawing.Size(100, 24);
             this.TB_Motor_Id.TabIndex = 7;
-       
+            this.TB_Motor_Id.TextChanged += new System.EventHandler(this.TB_Motor_Id_TextChanged);
             // 
             // Tb_Motor_Name
             // 
@@ -133,49 +120,26 @@
             this.Tb_Motor_Name.Size = new System.Drawing.Size(100, 24);
             this.Tb_Motor_Name.TabIndex = 8;
             // 
-            // Tb_Motor_Category_Id
-            // 
-            this.Tb_Motor_Category_Id.Location = new System.Drawing.Point(1176, 186);
-            this.Tb_Motor_Category_Id.Name = "Tb_Motor_Category_Id";
-            this.Tb_Motor_Category_Id.Size = new System.Drawing.Size(100, 24);
-            this.Tb_Motor_Category_Id.TabIndex = 9;
-            // 
             // Tb_Motor_Quntity
             // 
-            this.Tb_Motor_Quntity.Location = new System.Drawing.Point(1176, 156);
+            this.Tb_Motor_Quntity.Location = new System.Drawing.Point(1176, 126);
             this.Tb_Motor_Quntity.Name = "Tb_Motor_Quntity";
             this.Tb_Motor_Quntity.Size = new System.Drawing.Size(100, 24);
             this.Tb_Motor_Quntity.TabIndex = 10;
             // 
             // Tb_Motor_Price
             // 
-            this.Tb_Motor_Price.Location = new System.Drawing.Point(1176, 126);
+            this.Tb_Motor_Price.Location = new System.Drawing.Point(1176, 96);
             this.Tb_Motor_Price.Name = "Tb_Motor_Price";
             this.Tb_Motor_Price.Size = new System.Drawing.Size(100, 24);
             this.Tb_Motor_Price.TabIndex = 11;
             // 
             // Tb_Motor_Power
             // 
-            this.Tb_Motor_Power.Location = new System.Drawing.Point(1176, 96);
+            this.Tb_Motor_Power.Location = new System.Drawing.Point(1176, 66);
             this.Tb_Motor_Power.Name = "Tb_Motor_Power";
             this.Tb_Motor_Power.Size = new System.Drawing.Size(100, 24);
             this.Tb_Motor_Power.TabIndex = 12;
-            // 
-            // Tb_Motor_Decs
-            // 
-            this.Tb_Motor_Decs.Location = new System.Drawing.Point(1176, 66);
-            this.Tb_Motor_Decs.Name = "Tb_Motor_Decs";
-            this.Tb_Motor_Decs.Size = new System.Drawing.Size(100, 24);
-            this.Tb_Motor_Decs.TabIndex = 13;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(1291, 189);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(72, 17);
-            this.label7.TabIndex = 14;
-            this.label7.Text = "رقم القسم";
             // 
             // label8
             // 
@@ -256,15 +220,11 @@
             this.Controls.Add(this.BTN_Add);
             this.Controls.Add(this.Tb_Motor_search);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.Tb_Motor_Decs);
             this.Controls.Add(this.Tb_Motor_Power);
             this.Controls.Add(this.Tb_Motor_Price);
             this.Controls.Add(this.Tb_Motor_Quntity);
-            this.Controls.Add(this.Tb_Motor_Category_Id);
             this.Controls.Add(this.Tb_Motor_Name);
             this.Controls.Add(this.TB_Motor_Id);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -288,15 +248,11 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox TB_Motor_Id;
         private System.Windows.Forms.TextBox Tb_Motor_Name;
-        private System.Windows.Forms.TextBox Tb_Motor_Category_Id;
         private System.Windows.Forms.TextBox Tb_Motor_Quntity;
         private System.Windows.Forms.TextBox Tb_Motor_Price;
         private System.Windows.Forms.TextBox Tb_Motor_Power;
-        private System.Windows.Forms.TextBox Tb_Motor_Decs;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox Tb_Motor_search;
         private System.Windows.Forms.Button BTN_Add;

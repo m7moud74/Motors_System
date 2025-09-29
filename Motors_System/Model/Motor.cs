@@ -13,13 +13,13 @@ namespace Motors_System.Model
 
         public string MotorName { get; set; }
        
-        public string Description { get; set; }
+
 
         public decimal Power { get; set; }
 
         public decimal Price { get; set; }
 
         public int? StockQuantity { get; set; }
-        public int Category_id { get; set; }
+       
     }
 }
