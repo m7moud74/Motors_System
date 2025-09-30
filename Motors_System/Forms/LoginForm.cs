@@ -24,8 +24,9 @@ namespace Motors_System.Forms
             this.MaximizeBox = false; 
             this.MinimizeBox = true;
             this.WindowState = FormWindowState.Maximized;
+            ApplyDynamicTextDirection(this);
 
-          
+
 
         }
 
@@ -99,6 +100,32 @@ namespace Motors_System.Forms
         private void LoginForm_Load(object sender, EventArgs e)
         {
 
+        }
+        private void ApplyDynamicTextDirection(Control parent)
+        {
+            foreach (Control ctrl in parent.Controls)
+            {
+                if (ctrl is TextBox tb)
+                {
+                    tb.TextChanged += (s, e) =>
+                    {
+                        if (System.Text.RegularExpressions.Regex.IsMatch(tb.Text, @"\p{IsArabic}"))
+                        {
+                            tb.RightToLeft = RightToLeft.Yes;  // عربي
+                            tb.SelectionStart = tb.Text.Length; // المؤشر في الآخر
+                        }
+                        else
+                        {
+                            tb.RightToLeft = RightToLeft.No;   // انجليزي
+                            tb.SelectionStart = tb.Text.Length; // المؤشر في الآخر
+                        }
+                    };
+                }
+                else if (ctrl.HasChildren)
+                {
+                    ApplyDynamicTextDirection(ctrl); // لو فيه Controls جوه Panel أو GroupBox
+                }
+            }
         }
     }
 }

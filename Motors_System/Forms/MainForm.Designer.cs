@@ -38,7 +38,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Tahoma", 16F);
-            this.button1.Location = new System.Drawing.Point(661, 138);
+            this.button1.Location = new System.Drawing.Point(673, 210);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(399, 73);
             this.button1.TabIndex = 0;
@@ -49,7 +49,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Tahoma", 16F);
-            this.button2.Location = new System.Drawing.Point(973, 321);
+            this.button2.Location = new System.Drawing.Point(988, 399);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(399, 73);
             this.button2.TabIndex = 1;
@@ -60,18 +60,18 @@
             // Go_returns_btn
             // 
             this.Go_returns_btn.Font = new System.Drawing.Font("Tahoma", 16F);
-            this.Go_returns_btn.Location = new System.Drawing.Point(389, 321);
+            this.Go_returns_btn.Location = new System.Drawing.Point(389, 399);
             this.Go_returns_btn.Name = "Go_returns_btn";
             this.Go_returns_btn.Size = new System.Drawing.Size(399, 73);
             this.Go_returns_btn.TabIndex = 2;
-            this.Go_returns_btn.Text = "اضافه مرتجع";
+            this.Go_returns_btn.Text = "المبيعات و اضافه مرتجع";
             this.Go_returns_btn.UseVisualStyleBackColor = true;
             this.Go_returns_btn.Click += new System.EventHandler(this.button3_Click);
             // 
             // Go_Users_btn
             // 
             this.Go_Users_btn.Font = new System.Drawing.Font("Tahoma", 16F);
-            this.Go_Users_btn.Location = new System.Drawing.Point(982, 562);
+            this.Go_Users_btn.Location = new System.Drawing.Point(988, 637);
             this.Go_Users_btn.Name = "Go_Users_btn";
             this.Go_Users_btn.Size = new System.Drawing.Size(399, 73);
             this.Go_Users_btn.TabIndex = 3;
@@ -82,7 +82,7 @@
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("Tahoma", 16F);
-            this.button3.Location = new System.Drawing.Point(389, 562);
+            this.button3.Location = new System.Drawing.Point(389, 637);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(399, 73);
             this.button3.TabIndex = 4;

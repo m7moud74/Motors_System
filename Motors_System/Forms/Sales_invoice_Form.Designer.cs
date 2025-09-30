@@ -228,7 +228,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1297, 504);
+            this.ClientSize = new System.Drawing.Size(1843, 838);
             this.Controls.Add(this.BTN_to_bk_home);
             this.Controls.Add(this.TB_Motor_Name);
             this.Controls.Add(this.TB_Custmor_name);

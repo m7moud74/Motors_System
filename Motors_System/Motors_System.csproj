@@ -145,5 +145,8 @@
   <ItemGroup>
     <None Include="Resources\شركه المليجي.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Rebo\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
