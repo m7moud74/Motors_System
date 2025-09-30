@@ -37,7 +37,7 @@
             // 
             // User_Name_TB
             // 
-            this.User_Name_TB.Location = new System.Drawing.Point(322, 64);
+            this.User_Name_TB.Location = new System.Drawing.Point(668, 182);
             this.User_Name_TB.Name = "User_Name_TB";
             this.User_Name_TB.Size = new System.Drawing.Size(88, 24);
             this.User_Name_TB.TabIndex = 0;
@@ -45,7 +45,7 @@
             // 
             // User_pass_Tb
             // 
-            this.User_pass_Tb.Location = new System.Drawing.Point(322, 116);
+            this.User_pass_Tb.Location = new System.Drawing.Point(668, 219);
             this.User_pass_Tb.Name = "User_pass_Tb";
             this.User_pass_Tb.Size = new System.Drawing.Size(88, 24);
             this.User_pass_Tb.TabIndex = 1;
@@ -54,7 +54,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(486, 70);
+            this.label1.Location = new System.Drawing.Point(762, 182);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(101, 17);
             this.label1.TabIndex = 2;
@@ -63,7 +63,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(486, 116);
+            this.label2.Location = new System.Drawing.Point(778, 219);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(74, 17);
             this.label2.TabIndex = 3;
@@ -71,9 +71,9 @@
             // 
             // Login_Btn
             // 
-            this.Login_Btn.Location = new System.Drawing.Point(314, 162);
+            this.Login_Btn.Location = new System.Drawing.Point(648, 294);
             this.Login_Btn.Name = "Login_Btn";
-            this.Login_Btn.Size = new System.Drawing.Size(113, 23);
+            this.Login_Btn.Size = new System.Drawing.Size(131, 43);
             this.Login_Btn.TabIndex = 4;
             this.Login_Btn.Text = "تسجيل الدخول";
             this.Login_Btn.UseVisualStyleBackColor = true;
@@ -83,7 +83,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(791, 459);
+            this.ClientSize = new System.Drawing.Size(1370, 571);
             this.Controls.Add(this.Login_Btn);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);

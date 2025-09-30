@@ -24,12 +24,19 @@ namespace Motors_System.Forms
             Tb_Motor_Quntity.KeyDown += TextBox_KeyDown;
             Motor_DGV.TabStop = false;
             Tb_Motor_search.TabStop = false;
+            this.FormBorderStyle = FormBorderStyle.FixedDialog; // يخلي الحجم ثابت
+            this.MaximizeBox = false; // يمنع زرار التكبير
+            this.MinimizeBox = true;
+            this.WindowState = FormWindowState.Maximized;
+         
 
         }
 
         private void MotorForm_Load(object sender, EventArgs e)
         {
             TB_Motor_Id.Enabled = false;
+      
+
             FillData();
             // تكبير خط العناوين
             Motor_DGV.ColumnHeadersDefaultCellStyle.Font = new Font("Tahoma", 11, FontStyle.Bold);
@@ -66,26 +73,33 @@ namespace Motors_System.Forms
 
         }
 
-        private void FillData(string search = "")
+        private void FillData(string search = "", DateTime? exactDate = null)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 try
                 {
                     con.Open();
-                    string query = "SELECT * FROM Motors";
+                    string query = "SELECT * FROM Motors WHERE 1=1";
 
                     if (!string.IsNullOrWhiteSpace(search))
                     {
-                        query += " WHERE MotorName LIKE @search";
+                        query += " AND MotorName LIKE @search";
+                    }
+
+                    if (exactDate.HasValue)
+                    {
+                        // نفلتر حسب اليوم فقط، بدون وقت
+                        query += " AND CAST(CreatedDate AS DATE) = @exactDate";
                     }
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
                         if (!string.IsNullOrWhiteSpace(search))
-                        {
                             cmd.Parameters.AddWithValue("@search", "%" + search + "%");
-                        }
+
+                        if (exactDate.HasValue)
+                            cmd.Parameters.AddWithValue("@exactDate", exactDate.Value.Date);
 
                         using (SqlDataReader dr = cmd.ExecuteReader())
                         {
@@ -104,16 +118,10 @@ namespace Motors_System.Forms
                                 };
                                 motors.Add(motor);
                             }
+
                             Motor_DGV.DataSource = motors;
+                            FormatMotorDGV();
 
-                            Motor_DGV.Columns["MotorId"].HeaderText = "رقم المحرك";
-                            Motor_DGV.Columns["MotorName"].HeaderText = "اسم المحرك";
-                            Motor_DGV.Columns["Type"].HeaderText = "النوع";
-                            Motor_DGV.Columns["Power"].HeaderText = "القوة";
-                            Motor_DGV.Columns["Price"].HeaderText = "السعر";
-                            Motor_DGV.Columns["StockQuantity"].HeaderText = "الكمية المتوفرة";
-
-                            Motor_DGV.AutoResizeColumns();
                         }
                     }
                 }
@@ -124,9 +132,14 @@ namespace Motors_System.Forms
             }
         }
 
+
+
+
         private void Tb_Motor_search_TextChanged(object sender, EventArgs e)
         {
-            FillData(Tb_Motor_search.Text);
+            string searchText = Tb_Motor_search.Text.Trim();
+            FillData(searchText);
+            FormatMotorDGV();
         }
 
         private void BTN_Add_Click(object sender, EventArgs e)
@@ -171,15 +184,8 @@ namespace Motors_System.Forms
                         cmd.ExecuteNonQuery();
                         MessageBox.Show("تمت الإضافة بنجاح ✅", "نجاح", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         ClearInputFields();
-
-                        Motor_DGV.DefaultCellStyle.Font = new Font("Segoe UI", 12, FontStyle.Regular);
-
-                        // تكبير خط الهيدر (العناوين)
-                        Motor_DGV.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
-
-                        // ممكن كمان تزود ارتفاع الصفوف علشان الكلام ياخد مساحة كفاية
-                        Motor_DGV.RowTemplate.Height = 35;
                         FillData();
+                        FormatMotorDGV();
                     }
                 }
                 catch (Exception ex)
@@ -225,6 +231,7 @@ namespace Motors_System.Forms
                         MessageBox.Show("تم التعديل بنجاح ✅", "نجاح", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         ClearInputFields();
                         FillData();
+                        FormatMotorDGV();
 
                     }
                 }
@@ -265,6 +272,7 @@ namespace Motors_System.Forms
                             MessageBox.Show("تم الحذف بنجاح ❌", "نجح", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             ClearInputFields();
                             FillData();
+                            FormatMotorDGV();
                         }
                         else
                         {
@@ -421,7 +429,80 @@ namespace Motors_System.Forms
             }
         }
 
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Btn_Sjow_by_Time_Click(object sender, EventArgs e)
+        {
+            DateTime selectedDate = DTB_Add.Value.Date; // ناخد التاريخ بدون وقت
+            FillData("", selectedDate);
+        }
+
+        private void btn_Show_all_Click(object sender, EventArgs e)
+        {
+            FillData(Tb_Motor_search.Text);
+        }
+
+        private void Btn_Show_TotalPriceByDay_Click(object sender, EventArgs e)
+        {
+            DateTime fromDate = DTB_Add.Value.Date; // التاريخ المحدد بدون وقت
+            decimal totalPrice = 0m;
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    con.Open();
+                    string query = "SELECT SUM(Price * StockQuantity) FROM Motors WHERE CAST(CreatedDate AS DATE) >= @fromDate";
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@fromDate", fromDate);
+
+                        object result = cmd.ExecuteScalar();
+                        if (result != DBNull.Value && result != null)
+                        {
+                            totalPrice = Convert.ToDecimal(result);
+                        }
+                    }
+
+                    MessageBox.Show(
+                        $"إجمالي سعر المحركات المضافة منذ {fromDate.Day}/{fromDate.Month}/{fromDate.Year} هو: {totalPrice} جنيه",
+                        "الإجمالي", MessageBoxButtons.OK, MessageBoxIcon.Information
+                    );
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("خطأ في حساب الإجمالي: " + ex.Message, "خطأ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void FormatMotorDGV()
+        {
+            // تعديل العناوين إلى العربية
+            if (Motor_DGV.Columns["MotorId"] != null) Motor_DGV.Columns["MotorId"].HeaderText = "رقم المحرك";
+            if (Motor_DGV.Columns["MotorName"] != null) Motor_DGV.Columns["MotorName"].HeaderText = "اسم المحرك";
+            if (Motor_DGV.Columns["Type"] != null) Motor_DGV.Columns["Type"].HeaderText = "النوع";
+            if (Motor_DGV.Columns["Power"] != null) Motor_DGV.Columns["Power"].HeaderText = "القوة";
+            if (Motor_DGV.Columns["Price"] != null) Motor_DGV.Columns["Price"].HeaderText = "السعر";
+            if (Motor_DGV.Columns["StockQuantity"] != null) Motor_DGV.Columns["StockQuantity"].HeaderText = "الكمية المتاحة";
+
+            // ضبط الخط والصفوف
+            Motor_DGV.ColumnHeadersDefaultCellStyle.Font = new Font("Tahoma", 11, FontStyle.Bold);
+            Motor_DGV.DefaultCellStyle.Font = new Font("Tahoma", 11, FontStyle.Regular);
+            Motor_DGV.RowTemplate.Height = 30; // تثبيت ارتفاع الصفوف
+            Motor_DGV.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            Motor_DGV.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            // لا تغير حجم الأعمدة تلقائيًا بعد هذا، أو استخدم AllCellsExceptHeader
+            Motor_DGV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+            Motor_DGV.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+        }
+
     }
+
 
 }
 
