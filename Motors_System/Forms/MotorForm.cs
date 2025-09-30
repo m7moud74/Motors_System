@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Motors_System.Forms
@@ -23,7 +24,7 @@ namespace Motors_System.Forms
             Tb_Motor_Quntity.KeyDown += TextBox_KeyDown;
             Motor_DGV.TabStop = false;
             Tb_Motor_search.TabStop = false;
-            
+
         }
 
         private void MotorForm_Load(object sender, EventArgs e)
@@ -54,7 +55,11 @@ namespace Motors_System.Forms
 
             // ضبط ارتفاع العناوين تلقائيًا
             Motor_DGV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-
+  
+         
+            ApplyTextBoxAlternateColors(this);
+            TB_Motor_Id.BackColor = Color.LightGray;
+            TB_Motor_Id.ForeColor = Color.Black;
 
 
 
@@ -138,7 +143,7 @@ namespace Motors_System.Forms
                 {
                     con.Open();
 
-                   
+
                     string checkQuery = "SELECT COUNT(*) FROM Motors WHERE MotorName = @name AND MotorType = @type";
                     using (SqlCommand checkCmd = new SqlCommand(checkQuery, con))
                     {
@@ -278,7 +283,7 @@ namespace Motors_System.Forms
         {
             if (string.IsNullOrWhiteSpace(Tb_Motor_Name.Text))
                 return false;
-            if (string.IsNullOrWhiteSpace(Tb_Tybe.Text)) 
+            if (string.IsNullOrWhiteSpace(Tb_Tybe.Text))
                 return false;
 
             if (!decimal.TryParse(Tb_Motor_Power.Text, out _))
@@ -290,7 +295,7 @@ namespace Motors_System.Forms
             if (!int.TryParse(Tb_Motor_Quntity.Text, out int quantity))
                 return false;
 
-            if (quantity <= 0) 
+            if (quantity <= 0)
                 return false;
             return true;
         }
@@ -310,7 +315,7 @@ namespace Motors_System.Forms
             if (!int.TryParse(Tb_Motor_Quntity.Text, out int quantity))
                 return false;
 
-         
+
             if (quantity < 0)
                 return false;
 
@@ -354,7 +359,7 @@ namespace Motors_System.Forms
 
         private void TB_Motor_Id_TextChanged(object sender, EventArgs e)
         {
-            
+
 
 
         }
@@ -391,5 +396,32 @@ namespace Motors_System.Forms
         {
 
         }
+        private void ApplyTextBoxAlternateColors(Control parent)
+        {
+
+            // هنجمع كل التكست بوكس
+            var textBoxes = new List<TextBox>();
+
+            foreach (Control ctrl in parent.Controls)
+            {
+                if (ctrl is TextBox tb)
+                    textBoxes.Add(tb);
+            }
+
+            // نرتبهم حسب موقعهم الرأسي (Top)
+            textBoxes = textBoxes.OrderBy(tb => tb.Top).ToList();
+
+            // نوزع الألوان بالتناوب
+            for (int i = 0; i < textBoxes.Count; i++)
+            {
+                if (i % 2 == 0)
+                    textBoxes[i].BackColor = Color.White;       // أبيض
+                else
+                    textBoxes[i].BackColor = Color.LightGray;  // رمادي
+            }
+        }
+
     }
+
 }
+

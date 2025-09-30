@@ -112,7 +112,7 @@
             this.TB_Motor_Id.Location = new System.Drawing.Point(1176, 6);
             this.TB_Motor_Id.Name = "TB_Motor_Id";
             this.TB_Motor_Id.Size = new System.Drawing.Size(100, 24);
-            this.TB_Motor_Id.TabIndex = 7;
+            this.TB_Motor_Id.TabIndex = 0;
             this.TB_Motor_Id.TextChanged += new System.EventHandler(this.TB_Motor_Id_TextChanged);
             // 
             // Tb_Motor_Name
