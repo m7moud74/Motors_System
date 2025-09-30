@@ -37,19 +37,19 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(303, 25);
+            this.button1.Location = new System.Drawing.Point(245, 53);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(90, 37);
+            this.button1.Size = new System.Drawing.Size(167, 59);
             this.button1.TabIndex = 0;
-            this.button1.Text = "المواتير";
+            this.button1.Text = "اضافه مواتير";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(215, 130);
+            this.button2.Location = new System.Drawing.Point(366, 146);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 34);
+            this.button2.Size = new System.Drawing.Size(128, 44);
             this.button2.TabIndex = 1;
             this.button2.Text = "فاتوره بيع";
             this.button2.UseVisualStyleBackColor = true;
@@ -57,19 +57,19 @@
             // 
             // Go_returns_btn
             // 
-            this.Go_returns_btn.Location = new System.Drawing.Point(376, 136);
+            this.Go_returns_btn.Location = new System.Drawing.Point(157, 146);
             this.Go_returns_btn.Name = "Go_returns_btn";
-            this.Go_returns_btn.Size = new System.Drawing.Size(75, 23);
+            this.Go_returns_btn.Size = new System.Drawing.Size(133, 44);
             this.Go_returns_btn.TabIndex = 2;
-            this.Go_returns_btn.Text = "المرتجعات";
+            this.Go_returns_btn.Text = "اضافه مرتجع";
             this.Go_returns_btn.UseVisualStyleBackColor = true;
             this.Go_returns_btn.Click += new System.EventHandler(this.button3_Click);
             // 
             // Go_Users_btn
             // 
-            this.Go_Users_btn.Location = new System.Drawing.Point(376, 193);
+            this.Go_Users_btn.Location = new System.Drawing.Point(366, 253);
             this.Go_Users_btn.Name = "Go_Users_btn";
-            this.Go_Users_btn.Size = new System.Drawing.Size(118, 32);
+            this.Go_Users_btn.Size = new System.Drawing.Size(128, 41);
             this.Go_Users_btn.TabIndex = 3;
             this.Go_Users_btn.Text = "المستخدمين";
             this.Go_Users_btn.UseVisualStyleBackColor = true;
@@ -77,11 +77,11 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(174, 253);
+            this.button3.Location = new System.Drawing.Point(148, 253);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(155, 23);
+            this.button3.Size = new System.Drawing.Size(142, 41);
             this.button3.TabIndex = 4;
-            this.button3.Text = "الحجات الي رجعت";
+            this.button3.Text = "المرتجعات";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 

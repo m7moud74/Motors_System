@@ -13,7 +13,7 @@ namespace Motors_System.Model
 
         public string MotorName { get; set; }
        
-
+        public string Type { get; set; }
 
         public decimal Power { get; set; }
 

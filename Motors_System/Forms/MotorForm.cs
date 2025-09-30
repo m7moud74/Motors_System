@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Motors_System.Forms
@@ -15,12 +16,49 @@ namespace Motors_System.Forms
         {
             InitializeComponent();
             connectionString = ConfigurationManager.ConnectionStrings["cs"].ConnectionString;
+            Tb_Motor_Name.KeyDown += TextBox_KeyDown;
+            Tb_Tybe.KeyDown += TextBox_KeyDown;
+            Tb_Motor_Power.KeyDown += TextBox_KeyDown;
+            Tb_Motor_Price.KeyDown += TextBox_KeyDown;
+            Tb_Motor_Quntity.KeyDown += TextBox_KeyDown;
+            Motor_DGV.TabStop = false;
+            Tb_Motor_search.TabStop = false;
+            
         }
 
         private void MotorForm_Load(object sender, EventArgs e)
         {
             TB_Motor_Id.Enabled = false;
             FillData();
+            // تكبير خط العناوين
+            Motor_DGV.ColumnHeadersDefaultCellStyle.Font = new Font("Tahoma", 11, FontStyle.Bold);
+
+            // محاذاة العناوين في النص
+            Motor_DGV.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            // تكبير خط الخلايا
+            Motor_DGV.DefaultCellStyle.Font = new Font("Tahoma", 11, FontStyle.Regular);
+
+            // محاذاة الخلايا في النص
+            Motor_DGV.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            // تظليل الصفوف بالتبادل
+            Motor_DGV.AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray;
+
+            // زيادة ارتفاع الصفوف
+            Motor_DGV.RowTemplate.Height = 30;
+
+            // حجم الأعمدة والصفوف تلقائيًا
+            Motor_DGV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            Motor_DGV.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+
+            // ضبط ارتفاع العناوين تلقائيًا
+            Motor_DGV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+
+
+
+
+
         }
 
         private void FillData(string search = "")
@@ -54,22 +92,22 @@ namespace Motors_System.Forms
                                 {
                                     MotorId = Convert.ToInt32(dr["MotorId"]),
                                     MotorName = dr["MotorName"].ToString(),
-                                    
+                                    Type = dr["MotorType"] != DBNull.Value ? dr["MotorType"].ToString() : "",
                                     Power = Convert.ToDecimal(dr["Power"]),
                                     Price = Convert.ToDecimal(dr["Price"]),
                                     StockQuantity = dr["StockQuantity"] != DBNull.Value ? Convert.ToInt32(dr["StockQuantity"]) : (int?)null,
-                                 
                                 };
                                 motors.Add(motor);
                             }
                             Motor_DGV.DataSource = motors;
+
                             Motor_DGV.Columns["MotorId"].HeaderText = "رقم المحرك";
                             Motor_DGV.Columns["MotorName"].HeaderText = "اسم المحرك";
+                            Motor_DGV.Columns["Type"].HeaderText = "النوع";
                             Motor_DGV.Columns["Power"].HeaderText = "القوة";
                             Motor_DGV.Columns["Price"].HeaderText = "السعر";
                             Motor_DGV.Columns["StockQuantity"].HeaderText = "الكمية المتوفرة";
 
-                            // تعديل حجم الأعمدة تلقائيًا
                             Motor_DGV.AutoResizeColumns();
                         }
                     }
@@ -88,7 +126,7 @@ namespace Motors_System.Forms
 
         private void BTN_Add_Click(object sender, EventArgs e)
         {
-            if (!ValidateInput())
+            if (!ValidateInputForAdd())
             {
                 MessageBox.Show("برجاء ملء جميع البيانات المطلوبة بشكل صحيح", "تحذير", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -99,20 +137,43 @@ namespace Motors_System.Forms
                 try
                 {
                     con.Open();
-                    string query = "INSERT INTO Motors (MotorName, Power, Price, StockQuantity) VALUES (@name,@power, @price, @stock)";
 
+                   
+                    string checkQuery = "SELECT COUNT(*) FROM Motors WHERE MotorName = @name AND MotorType = @type";
+                    using (SqlCommand checkCmd = new SqlCommand(checkQuery, con))
+                    {
+                        checkCmd.Parameters.AddWithValue("@name", Tb_Motor_Name.Text.Trim());
+                        checkCmd.Parameters.AddWithValue("@type", Tb_Tybe.Text.Trim());
+                        int count = (int)checkCmd.ExecuteScalar();
+
+                        if (count > 0)
+                        {
+                            MessageBox.Show("⚠️ هذا المحرك بنفس الاسم والنوع موجود بالفعل، من فضلك اختر بيانات مختلفة.",
+                                "تحذير", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            return;
+                        }
+                    }
+
+                    string query = "INSERT INTO Motors (MotorName, MotorType, Power, Price, StockQuantity) VALUES (@name,@type,@power,@price,@stock)";
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
                         cmd.Parameters.AddWithValue("@name", Tb_Motor_Name.Text.Trim());
-                      
+                        cmd.Parameters.AddWithValue("@type", Tb_Tybe.Text.Trim());
                         cmd.Parameters.AddWithValue("@power", decimal.Parse(Tb_Motor_Power.Text));
                         cmd.Parameters.AddWithValue("@price", decimal.Parse(Tb_Motor_Price.Text));
                         cmd.Parameters.AddWithValue("@stock", int.Parse(Tb_Motor_Quntity.Text));
-                       
 
                         cmd.ExecuteNonQuery();
-                        MessageBox.Show("تمت الإضافة بنجاح ✅", "نجح", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("تمت الإضافة بنجاح ✅", "نجاح", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         ClearInputFields();
+
+                        Motor_DGV.DefaultCellStyle.Font = new Font("Segoe UI", 12, FontStyle.Regular);
+
+                        // تكبير خط الهيدر (العناوين)
+                        Motor_DGV.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+
+                        // ممكن كمان تزود ارتفاع الصفوف علشان الكلام ياخد مساحة كفاية
+                        Motor_DGV.RowTemplate.Height = 35;
                         FillData();
                     }
                 }
@@ -123,6 +184,7 @@ namespace Motors_System.Forms
             }
         }
 
+
         private void BTN_edit_Click(object sender, EventArgs e)
         {
             if (Motor_DGV.CurrentRow == null)
@@ -131,7 +193,7 @@ namespace Motors_System.Forms
                 return;
             }
 
-            if (!ValidateInput())
+            if (!ValidateInputForEdit())
             {
                 MessageBox.Show("برجاء ملء جميع البيانات المطلوبة بشكل صحيح", "تحذير", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -143,29 +205,22 @@ namespace Motors_System.Forms
                 {
                     int id = (int)Motor_DGV.CurrentRow.Cells["MotorId"].Value;
                     con.Open();
-                    string query = "UPDATE Motors SET MotorName=@name, Power=@power, Price=@price, StockQuantity=@stock WHERE MotorId=@id";
+                    string query = "UPDATE Motors SET MotorName=@name, MotorType=@type, Power=@power, Price=@price, StockQuantity=@stock WHERE MotorId=@id";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
                         cmd.Parameters.AddWithValue("@id", id);
                         cmd.Parameters.AddWithValue("@name", Tb_Motor_Name.Text.Trim());
-                      
+                        cmd.Parameters.AddWithValue("@type", Tb_Tybe.Text.Trim());
                         cmd.Parameters.AddWithValue("@power", decimal.Parse(Tb_Motor_Power.Text));
                         cmd.Parameters.AddWithValue("@price", decimal.Parse(Tb_Motor_Price.Text));
                         cmd.Parameters.AddWithValue("@stock", int.Parse(Tb_Motor_Quntity.Text));
-                   
 
-                        int rowsAffected = cmd.ExecuteNonQuery();
-                        if (rowsAffected > 0)
-                        {
-                            MessageBox.Show("تم التعديل بنجاح ✏️", "نجح", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            ClearInputFields();
-                            FillData();
-                        }
-                        else
-                        {
-                            MessageBox.Show("لم يتم العثور على المحرك المطلوب تعديله", "تحذير", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
+                        cmd.ExecuteNonQuery();
+                        MessageBox.Show("تم التعديل بنجاح ✅", "نجاح", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ClearInputFields();
+                        FillData();
+
                     }
                 }
                 catch (Exception ex)
@@ -219,9 +274,11 @@ namespace Motors_System.Forms
             }
         }
 
-        private bool ValidateInput()
+        private bool ValidateInputForAdd()
         {
             if (string.IsNullOrWhiteSpace(Tb_Motor_Name.Text))
+                return false;
+            if (string.IsNullOrWhiteSpace(Tb_Tybe.Text)) 
                 return false;
 
             if (!decimal.TryParse(Tb_Motor_Power.Text, out _))
@@ -230,10 +287,32 @@ namespace Motors_System.Forms
             if (!decimal.TryParse(Tb_Motor_Price.Text, out _))
                 return false;
 
-            if (!int.TryParse(Tb_Motor_Quntity.Text, out _))
+            if (!int.TryParse(Tb_Motor_Quntity.Text, out int quantity))
                 return false;
 
-          
+            if (quantity <= 0) 
+                return false;
+            return true;
+        }
+        private bool ValidateInputForEdit()
+        {
+            if (string.IsNullOrWhiteSpace(Tb_Motor_Name.Text))
+                return false;
+            if (string.IsNullOrWhiteSpace(Tb_Tybe.Text))
+                return false;
+
+            if (!decimal.TryParse(Tb_Motor_Power.Text, out _))
+                return false;
+
+            if (!decimal.TryParse(Tb_Motor_Price.Text, out _))
+                return false;
+
+            if (!int.TryParse(Tb_Motor_Quntity.Text, out int quantity))
+                return false;
+
+         
+            if (quantity < 0)
+                return false;
 
             return true;
         }
@@ -241,11 +320,11 @@ namespace Motors_System.Forms
         private void ClearInputFields()
         {
             Tb_Motor_Name.Clear();
-          
+            Tb_Tybe.Clear();
             Tb_Motor_Power.Clear();
             Tb_Motor_Price.Clear();
             Tb_Motor_Quntity.Clear();
-       
+
         }
 
         private void BTN_to_bk_home_Click(object sender, EventArgs e)
@@ -266,10 +345,10 @@ namespace Motors_System.Forms
             {
                 TB_Motor_Id.Text = Motor_DGV.CurrentRow.Cells["MotorId"].Value?.ToString() ?? "";
                 Tb_Motor_Name.Text = Motor_DGV.CurrentRow.Cells["MotorName"].Value?.ToString() ?? "";
+                Tb_Tybe.Text = Motor_DGV.CurrentRow.Cells["Type"].Value?.ToString() ?? "";
                 Tb_Motor_Power.Text = Motor_DGV.CurrentRow.Cells["Power"].Value?.ToString() ?? "";
                 Tb_Motor_Price.Text = Motor_DGV.CurrentRow.Cells["Price"].Value?.ToString() ?? "";
                 Tb_Motor_Quntity.Text = Motor_DGV.CurrentRow.Cells["StockQuantity"].Value?.ToString() ?? "";
-              
             }
         }
 
@@ -277,6 +356,39 @@ namespace Motors_System.Forms
         {
             
 
+
+        }
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Down)
+            {
+                e.SuppressKeyPress = true;
+                Control nextControl = GetNextControl((Control)sender, true);
+                while (nextControl != null && !nextControl.TabStop)
+                {
+                    nextControl = GetNextControl(nextControl, true);
+                }
+                if (nextControl != null) nextControl.Focus();
+            }
+            else if (e.KeyCode == Keys.Up)
+            {
+                e.SuppressKeyPress = true;
+                Control prevControl = GetNextControl((Control)sender, false);
+                while (prevControl != null && !prevControl.TabStop)
+                {
+                    prevControl = GetNextControl(prevControl, false);
+                }
+                if (prevControl != null) prevControl.Focus();
+            }
+        }
+
+        private void Motor_DGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void Tb_Motor_Name_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

@@ -43,7 +43,7 @@ namespace Motors_System.Forms
 
         private void Go_Users_btn_Click(object sender, EventArgs e)
         {
-            // تحقق من صلاحية الدخول
+           
             if (CurrentUser.Role != "Admin")
             {
                 MessageBox.Show("غير مسموح لك بالدخول إلى هذه الصفحة. فقط المسؤول (Admin) يمكنه الوصول.",

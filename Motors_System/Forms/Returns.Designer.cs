@@ -48,17 +48,18 @@
             this.btn_to_return = new System.Windows.Forms.Button();
             this.dtp_FromDate = new System.Windows.Forms.DateTimePicker();
             this.btn_ShowSalesFromDate = new System.Windows.Forms.Button();
+            this.BTN_to_bk_home = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Return)).BeginInit();
             this.SuspendLayout();
             // 
             // dgv_Return
             // 
             this.dgv_Return.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_Return.Location = new System.Drawing.Point(54, 327);
+            this.dgv_Return.Location = new System.Drawing.Point(12, 289);
             this.dgv_Return.Name = "dgv_Return";
             this.dgv_Return.RowHeadersWidth = 51;
             this.dgv_Return.RowTemplate.Height = 26;
-            this.dgv_Return.Size = new System.Drawing.Size(1083, 207);
+            this.dgv_Return.Size = new System.Drawing.Size(1228, 207);
             this.dgv_Return.TabIndex = 0;
             this.dgv_Return.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_Return_RowHeaderMouseDoubleClick);
             // 
@@ -192,9 +193,9 @@
             // 
             // btn_to_return
             // 
-            this.btn_to_return.Location = new System.Drawing.Point(340, 182);
+            this.btn_to_return.Location = new System.Drawing.Point(532, 505);
             this.btn_to_return.Name = "btn_to_return";
-            this.btn_to_return.Size = new System.Drawing.Size(75, 23);
+            this.btn_to_return.Size = new System.Drawing.Size(222, 40);
             this.btn_to_return.TabIndex = 44;
             this.btn_to_return.Text = "مرتجع";
             this.btn_to_return.UseVisualStyleBackColor = true;
@@ -202,26 +203,37 @@
             // 
             // dtp_FromDate
             // 
-            this.dtp_FromDate.Location = new System.Drawing.Point(12, 12);
+            this.dtp_FromDate.Location = new System.Drawing.Point(904, 514);
             this.dtp_FromDate.Name = "dtp_FromDate";
             this.dtp_FromDate.Size = new System.Drawing.Size(200, 24);
             this.dtp_FromDate.TabIndex = 45;
             // 
             // btn_ShowSalesFromDate
             // 
-            this.btn_ShowSalesFromDate.Location = new System.Drawing.Point(409, 72);
+            this.btn_ShowSalesFromDate.Location = new System.Drawing.Point(1123, 511);
             this.btn_ShowSalesFromDate.Name = "btn_ShowSalesFromDate";
-            this.btn_ShowSalesFromDate.Size = new System.Drawing.Size(75, 23);
+            this.btn_ShowSalesFromDate.Size = new System.Drawing.Size(142, 34);
             this.btn_ShowSalesFromDate.TabIndex = 46;
             this.btn_ShowSalesFromDate.Text = "المبيعات";
             this.btn_ShowSalesFromDate.UseVisualStyleBackColor = true;
             this.btn_ShowSalesFromDate.Click += new System.EventHandler(this.btn_ShowSalesFromDate_Click);
             // 
+            // BTN_to_bk_home
+            // 
+            this.BTN_to_bk_home.Location = new System.Drawing.Point(106, 502);
+            this.BTN_to_bk_home.Name = "BTN_to_bk_home";
+            this.BTN_to_bk_home.Size = new System.Drawing.Size(190, 43);
+            this.BTN_to_bk_home.TabIndex = 47;
+            this.BTN_to_bk_home.Text = "الصفحه الرئيسيه";
+            this.BTN_to_bk_home.UseVisualStyleBackColor = true;
+            this.BTN_to_bk_home.Click += new System.EventHandler(this.BTN_to_bk_home_Click);
+            // 
             // Returns
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1223, 546);
+            this.ClientSize = new System.Drawing.Size(1277, 546);
+            this.Controls.Add(this.BTN_to_bk_home);
             this.Controls.Add(this.btn_ShowSalesFromDate);
             this.Controls.Add(this.dtp_FromDate);
             this.Controls.Add(this.btn_to_return);
@@ -273,5 +285,6 @@
         private System.Windows.Forms.Button btn_to_return;
         private System.Windows.Forms.DateTimePicker dtp_FromDate;
         private System.Windows.Forms.Button btn_ShowSalesFromDate;
+        private System.Windows.Forms.Button BTN_to_bk_home;
     }
 }

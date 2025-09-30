@@ -78,6 +78,11 @@ namespace Motors_System.Forms
             }
         }
 
-        
+        private void BTN_to_bk_home_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var homeForm = new MainForm();
+            homeForm.Show();
+        }
     }
 }

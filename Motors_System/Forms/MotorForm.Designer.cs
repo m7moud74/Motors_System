@@ -45,19 +45,21 @@
             this.BTN_edit = new System.Windows.Forms.Button();
             this.BTN_Delete = new System.Windows.Forms.Button();
             this.BTN_to_bk_home = new System.Windows.Forms.Button();
-            this.BTN_to_bk_Previous_Page = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.Tb_Tybe = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.Motor_DGV)).BeginInit();
             this.SuspendLayout();
             // 
             // Motor_DGV
             // 
             this.Motor_DGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.Motor_DGV.Location = new System.Drawing.Point(237, 123);
+            this.Motor_DGV.Location = new System.Drawing.Point(310, 73);
             this.Motor_DGV.Name = "Motor_DGV";
             this.Motor_DGV.RowHeadersWidth = 51;
             this.Motor_DGV.RowTemplate.Height = 24;
-            this.Motor_DGV.Size = new System.Drawing.Size(880, 343);
+            this.Motor_DGV.Size = new System.Drawing.Size(706, 324);
             this.Motor_DGV.TabIndex = 0;
+            this.Motor_DGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Motor_DGV_CellContentClick);
             this.Motor_DGV.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.Motor_DGV_RowHeaderMouseDoubleClick);
             // 
             // label1
@@ -81,7 +83,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1312, 133);
+            this.label3.Location = new System.Drawing.Point(1313, 158);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 17);
             this.label3.TabIndex = 3;
@@ -90,7 +92,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1316, 99);
+            this.label4.Location = new System.Drawing.Point(1316, 126);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 17);
             this.label4.TabIndex = 4;
@@ -99,7 +101,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(1321, 66);
+            this.label5.Location = new System.Drawing.Point(1322, 95);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 17);
             this.label5.TabIndex = 5;
@@ -118,28 +120,29 @@
             this.Tb_Motor_Name.Location = new System.Drawing.Point(1176, 36);
             this.Tb_Motor_Name.Name = "Tb_Motor_Name";
             this.Tb_Motor_Name.Size = new System.Drawing.Size(100, 24);
-            this.Tb_Motor_Name.TabIndex = 8;
+            this.Tb_Motor_Name.TabIndex = 1;
+            this.Tb_Motor_Name.TextChanged += new System.EventHandler(this.Tb_Motor_Name_TextChanged);
             // 
             // Tb_Motor_Quntity
             // 
-            this.Tb_Motor_Quntity.Location = new System.Drawing.Point(1176, 126);
+            this.Tb_Motor_Quntity.Location = new System.Drawing.Point(1176, 158);
             this.Tb_Motor_Quntity.Name = "Tb_Motor_Quntity";
             this.Tb_Motor_Quntity.Size = new System.Drawing.Size(100, 24);
-            this.Tb_Motor_Quntity.TabIndex = 10;
+            this.Tb_Motor_Quntity.TabIndex = 5;
             // 
             // Tb_Motor_Price
             // 
-            this.Tb_Motor_Price.Location = new System.Drawing.Point(1176, 96);
+            this.Tb_Motor_Price.Location = new System.Drawing.Point(1176, 126);
             this.Tb_Motor_Price.Name = "Tb_Motor_Price";
             this.Tb_Motor_Price.Size = new System.Drawing.Size(100, 24);
-            this.Tb_Motor_Price.TabIndex = 11;
+            this.Tb_Motor_Price.TabIndex = 4;
             // 
             // Tb_Motor_Power
             // 
-            this.Tb_Motor_Power.Location = new System.Drawing.Point(1176, 66);
+            this.Tb_Motor_Power.Location = new System.Drawing.Point(1176, 92);
             this.Tb_Motor_Power.Name = "Tb_Motor_Power";
             this.Tb_Motor_Power.Size = new System.Drawing.Size(100, 24);
-            this.Tb_Motor_Power.TabIndex = 12;
+            this.Tb_Motor_Power.TabIndex = 3;
             // 
             // label8
             // 
@@ -160,7 +163,7 @@
             // 
             // BTN_Add
             // 
-            this.BTN_Add.Location = new System.Drawing.Point(903, 495);
+            this.BTN_Add.Location = new System.Drawing.Point(1013, 450);
             this.BTN_Add.Name = "BTN_Add";
             this.BTN_Add.Size = new System.Drawing.Size(190, 35);
             this.BTN_Add.TabIndex = 17;
@@ -170,7 +173,7 @@
             // 
             // BTN_edit
             // 
-            this.BTN_edit.Location = new System.Drawing.Point(605, 495);
+            this.BTN_edit.Location = new System.Drawing.Point(685, 450);
             this.BTN_edit.Name = "BTN_edit";
             this.BTN_edit.Size = new System.Drawing.Size(190, 35);
             this.BTN_edit.TabIndex = 18;
@@ -180,7 +183,7 @@
             // 
             // BTN_Delete
             // 
-            this.BTN_Delete.Location = new System.Drawing.Point(290, 495);
+            this.BTN_Delete.Location = new System.Drawing.Point(390, 450);
             this.BTN_Delete.Name = "BTN_Delete";
             this.BTN_Delete.Size = new System.Drawing.Size(190, 35);
             this.BTN_Delete.TabIndex = 19;
@@ -190,7 +193,7 @@
             // 
             // BTN_to_bk_home
             // 
-            this.BTN_to_bk_home.Location = new System.Drawing.Point(12, 495);
+            this.BTN_to_bk_home.Location = new System.Drawing.Point(124, 450);
             this.BTN_to_bk_home.Name = "BTN_to_bk_home";
             this.BTN_to_bk_home.Size = new System.Drawing.Size(190, 35);
             this.BTN_to_bk_home.TabIndex = 20;
@@ -198,22 +201,29 @@
             this.BTN_to_bk_home.UseVisualStyleBackColor = true;
             this.BTN_to_bk_home.Click += new System.EventHandler(this.BTN_to_bk_home_Click);
             // 
-            // BTN_to_bk_Previous_Page
+            // label6
             // 
-            this.BTN_to_bk_Previous_Page.Location = new System.Drawing.Point(1176, 495);
-            this.BTN_to_bk_Previous_Page.Name = "BTN_to_bk_Previous_Page";
-            this.BTN_to_bk_Previous_Page.Size = new System.Drawing.Size(190, 35);
-            this.BTN_to_bk_Previous_Page.TabIndex = 21;
-            this.BTN_to_bk_Previous_Page.Text = "الصفحه السابقه";
-            this.BTN_to_bk_Previous_Page.UseVisualStyleBackColor = true;
-            this.BTN_to_bk_Previous_Page.Click += new System.EventHandler(this.BTN_to_bk_Previous_Page_Click);
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(1322, 63);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(34, 17);
+            this.label6.TabIndex = 21;
+            this.label6.Text = "النوع";
+            // 
+            // Tb_Tybe
+            // 
+            this.Tb_Tybe.Location = new System.Drawing.Point(1176, 63);
+            this.Tb_Tybe.Name = "Tb_Tybe";
+            this.Tb_Tybe.Size = new System.Drawing.Size(100, 24);
+            this.Tb_Tybe.TabIndex = 2;
             // 
             // MotorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1375, 553);
-            this.Controls.Add(this.BTN_to_bk_Previous_Page);
+            this.ClientSize = new System.Drawing.Size(1375, 491);
+            this.Controls.Add(this.Tb_Tybe);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.BTN_to_bk_home);
             this.Controls.Add(this.BTN_Delete);
             this.Controls.Add(this.BTN_edit);
@@ -259,6 +269,7 @@
         private System.Windows.Forms.Button BTN_edit;
         private System.Windows.Forms.Button BTN_Delete;
         private System.Windows.Forms.Button BTN_to_bk_home;
-        private System.Windows.Forms.Button BTN_to_bk_Previous_Page;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox Tb_Tybe;
     }
 }

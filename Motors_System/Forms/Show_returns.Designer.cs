@@ -29,25 +29,36 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.BTN_to_bk_home = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(36, 270);
+            this.dataGridView1.Location = new System.Drawing.Point(230, 71);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 26;
-            this.dataGridView1.Size = new System.Drawing.Size(923, 150);
+            this.dataGridView1.Size = new System.Drawing.Size(776, 352);
             this.dataGridView1.TabIndex = 0;
-
+            // 
+            // BTN_to_bk_home
+            // 
+            this.BTN_to_bk_home.Location = new System.Drawing.Point(509, 443);
+            this.BTN_to_bk_home.Name = "BTN_to_bk_home";
+            this.BTN_to_bk_home.Size = new System.Drawing.Size(190, 35);
+            this.BTN_to_bk_home.TabIndex = 48;
+            this.BTN_to_bk_home.Text = "الصفحه الرئيسيه";
+            this.BTN_to_bk_home.UseVisualStyleBackColor = true;
+            this.BTN_to_bk_home.Click += new System.EventHandler(this.BTN_to_bk_home_Click);
             // 
             // Show_returns
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1205, 552);
+            this.Controls.Add(this.BTN_to_bk_home);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Show_returns";
             this.Text = "Show_returns";
@@ -60,5 +71,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button BTN_to_bk_home;
     }
 }

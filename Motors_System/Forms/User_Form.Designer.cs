@@ -40,6 +40,7 @@
             this.Btn_edit = new System.Windows.Forms.Button();
             this.Btn_delete = new System.Windows.Forms.Button();
             this.Cb_Role = new System.Windows.Forms.ComboBox();
+            this.BTN_to_bk_home = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.User_DGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -112,9 +113,9 @@
             // 
             // Btn_add
             // 
-            this.Btn_add.Location = new System.Drawing.Point(841, 437);
+            this.Btn_add.Location = new System.Drawing.Point(876, 437);
             this.Btn_add.Name = "Btn_add";
-            this.Btn_add.Size = new System.Drawing.Size(75, 23);
+            this.Btn_add.Size = new System.Drawing.Size(186, 32);
             this.Btn_add.TabIndex = 9;
             this.Btn_add.Text = "اضافه";
             this.Btn_add.UseVisualStyleBackColor = true;
@@ -122,9 +123,9 @@
             // 
             // Btn_edit
             // 
-            this.Btn_edit.Location = new System.Drawing.Point(710, 437);
+            this.Btn_edit.Location = new System.Drawing.Point(625, 437);
             this.Btn_edit.Name = "Btn_edit";
-            this.Btn_edit.Size = new System.Drawing.Size(75, 23);
+            this.Btn_edit.Size = new System.Drawing.Size(188, 35);
             this.Btn_edit.TabIndex = 11;
             this.Btn_edit.Text = "تعديل";
             this.Btn_edit.UseVisualStyleBackColor = true;
@@ -132,9 +133,9 @@
             // 
             // Btn_delete
             // 
-            this.Btn_delete.Location = new System.Drawing.Point(568, 437);
+            this.Btn_delete.Location = new System.Drawing.Point(343, 437);
             this.Btn_delete.Name = "Btn_delete";
-            this.Btn_delete.Size = new System.Drawing.Size(75, 23);
+            this.Btn_delete.Size = new System.Drawing.Size(215, 35);
             this.Btn_delete.TabIndex = 12;
             this.Btn_delete.Text = "حذف";
             this.Btn_delete.UseVisualStyleBackColor = true;
@@ -148,11 +149,22 @@
             this.Cb_Role.Size = new System.Drawing.Size(121, 24);
             this.Cb_Role.TabIndex = 13;
             // 
+            // BTN_to_bk_home
+            // 
+            this.BTN_to_bk_home.Location = new System.Drawing.Point(72, 437);
+            this.BTN_to_bk_home.Name = "BTN_to_bk_home";
+            this.BTN_to_bk_home.Size = new System.Drawing.Size(221, 35);
+            this.BTN_to_bk_home.TabIndex = 49;
+            this.BTN_to_bk_home.Text = "الصفحه الرئيسيه";
+            this.BTN_to_bk_home.UseVisualStyleBackColor = true;
+            this.BTN_to_bk_home.Click += new System.EventHandler(this.BTN_to_bk_home_Click);
+            // 
             // User_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1186, 505);
+            this.Controls.Add(this.BTN_to_bk_home);
             this.Controls.Add(this.Cb_Role);
             this.Controls.Add(this.Btn_delete);
             this.Controls.Add(this.Btn_edit);
@@ -188,5 +200,6 @@
         private System.Windows.Forms.Button Btn_edit;
         private System.Windows.Forms.Button Btn_delete;
         private System.Windows.Forms.ComboBox Cb_Role;
+        private System.Windows.Forms.Button BTN_to_bk_home;
     }
 }

@@ -204,5 +204,12 @@ namespace Motors_System.Forms
             Tb_pass.Clear();
             Cb_Role.SelectedIndex = -1;
         }
+
+        private void BTN_to_bk_home_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var homeForm = new MainForm();
+            homeForm.Show();
+        }
     }
 }
