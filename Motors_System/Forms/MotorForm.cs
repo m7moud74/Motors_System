@@ -447,7 +447,7 @@ namespace Motors_System.Forms
 
         private void Btn_Show_TotalPriceByDay_Click(object sender, EventArgs e)
         {
-            DateTime fromDate = DTB_Add.Value.Date; // التاريخ المحدد بدون وقت
+            DateTime fromDate = DTB_Add.Value.Date; 
             decimal totalPrice = 0m;
 
             using (SqlConnection con = new SqlConnection(connectionString))
@@ -455,7 +455,7 @@ namespace Motors_System.Forms
                 try
                 {
                     con.Open();
-                    string query = "SELECT SUM(Price * StockQuantity) FROM Motors WHERE CAST(CreatedDate AS DATE) >= @fromDate";
+                    string query = "SELECT SUM(Price * StockQuantity) FROM Motors WHERE CAST(CreatedDate AS DATE) = @fromDate";
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     {
                         cmd.Parameters.AddWithValue("@fromDate", fromDate);

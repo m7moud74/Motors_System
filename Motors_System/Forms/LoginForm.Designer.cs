@@ -37,43 +37,48 @@
             // 
             // User_Name_TB
             // 
-            this.User_Name_TB.Location = new System.Drawing.Point(668, 182);
+            this.User_Name_TB.Font = new System.Drawing.Font("Tahoma", 16F);
+            this.User_Name_TB.Location = new System.Drawing.Point(756, 365);
             this.User_Name_TB.Name = "User_Name_TB";
-            this.User_Name_TB.Size = new System.Drawing.Size(88, 24);
+            this.User_Name_TB.Size = new System.Drawing.Size(250, 40);
             this.User_Name_TB.TabIndex = 0;
             this.User_Name_TB.TextChanged += new System.EventHandler(this.User_Name_TB_TextChanged);
             // 
             // User_pass_Tb
             // 
-            this.User_pass_Tb.Location = new System.Drawing.Point(668, 219);
+            this.User_pass_Tb.Font = new System.Drawing.Font("Tahoma", 16F);
+            this.User_pass_Tb.Location = new System.Drawing.Point(756, 435);
             this.User_pass_Tb.Name = "User_pass_Tb";
-            this.User_pass_Tb.Size = new System.Drawing.Size(88, 24);
+            this.User_pass_Tb.Size = new System.Drawing.Size(250, 40);
             this.User_pass_Tb.TabIndex = 1;
             this.User_pass_Tb.TextChanged += new System.EventHandler(this.User_pass_Tb_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(762, 182);
+            this.label1.Font = new System.Drawing.Font("Tahoma", 16F);
+            this.label1.Location = new System.Drawing.Point(1036, 365);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 17);
+            this.label1.Size = new System.Drawing.Size(193, 33);
             this.label1.TabIndex = 2;
             this.label1.Text = "اسم المستخدم";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(778, 219);
+            this.label2.Font = new System.Drawing.Font("Tahoma", 16F);
+            this.label2.Location = new System.Drawing.Point(1047, 435);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 17);
+            this.label2.Size = new System.Drawing.Size(140, 33);
             this.label2.TabIndex = 3;
             this.label2.Text = "كلمة المرور";
             // 
             // Login_Btn
             // 
-            this.Login_Btn.Location = new System.Drawing.Point(648, 294);
+            this.Login_Btn.Font = new System.Drawing.Font("Tahoma", 12F);
+            this.Login_Btn.Location = new System.Drawing.Point(800, 499);
             this.Login_Btn.Name = "Login_Btn";
-            this.Login_Btn.Size = new System.Drawing.Size(131, 43);
+            this.Login_Btn.Size = new System.Drawing.Size(150, 40);
             this.Login_Btn.TabIndex = 4;
             this.Login_Btn.Text = "تسجيل الدخول";
             this.Login_Btn.UseVisualStyleBackColor = true;
@@ -83,7 +88,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1370, 571);
+            this.BackgroundImage = global::Motors_System.Properties.Resources.شركه_المليجي;
+            this.ClientSize = new System.Drawing.Size(1755, 885);
             this.Controls.Add(this.Login_Btn);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);

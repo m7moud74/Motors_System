@@ -37,9 +37,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(245, 53);
+            this.button1.Font = new System.Drawing.Font("Tahoma", 16F);
+            this.button1.Location = new System.Drawing.Point(661, 138);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(167, 59);
+            this.button1.Size = new System.Drawing.Size(399, 73);
             this.button1.TabIndex = 0;
             this.button1.Text = "اضافه مواتير";
             this.button1.UseVisualStyleBackColor = true;
@@ -47,9 +48,10 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(366, 146);
+            this.button2.Font = new System.Drawing.Font("Tahoma", 16F);
+            this.button2.Location = new System.Drawing.Point(973, 321);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(128, 44);
+            this.button2.Size = new System.Drawing.Size(399, 73);
             this.button2.TabIndex = 1;
             this.button2.Text = "فاتوره بيع";
             this.button2.UseVisualStyleBackColor = true;
@@ -57,9 +59,10 @@
             // 
             // Go_returns_btn
             // 
-            this.Go_returns_btn.Location = new System.Drawing.Point(157, 146);
+            this.Go_returns_btn.Font = new System.Drawing.Font("Tahoma", 16F);
+            this.Go_returns_btn.Location = new System.Drawing.Point(389, 321);
             this.Go_returns_btn.Name = "Go_returns_btn";
-            this.Go_returns_btn.Size = new System.Drawing.Size(133, 44);
+            this.Go_returns_btn.Size = new System.Drawing.Size(399, 73);
             this.Go_returns_btn.TabIndex = 2;
             this.Go_returns_btn.Text = "اضافه مرتجع";
             this.Go_returns_btn.UseVisualStyleBackColor = true;
@@ -67,9 +70,10 @@
             // 
             // Go_Users_btn
             // 
-            this.Go_Users_btn.Location = new System.Drawing.Point(366, 253);
+            this.Go_Users_btn.Font = new System.Drawing.Font("Tahoma", 16F);
+            this.Go_Users_btn.Location = new System.Drawing.Point(982, 562);
             this.Go_Users_btn.Name = "Go_Users_btn";
-            this.Go_Users_btn.Size = new System.Drawing.Size(128, 41);
+            this.Go_Users_btn.Size = new System.Drawing.Size(399, 73);
             this.Go_Users_btn.TabIndex = 3;
             this.Go_Users_btn.Text = "المستخدمين";
             this.Go_Users_btn.UseVisualStyleBackColor = true;
@@ -77,9 +81,10 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(148, 253);
+            this.button3.Font = new System.Drawing.Font("Tahoma", 16F);
+            this.button3.Location = new System.Drawing.Point(389, 562);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(142, 41);
+            this.button3.Size = new System.Drawing.Size(399, 73);
             this.button3.TabIndex = 4;
             this.button3.Text = "المرتجعات";
             this.button3.UseVisualStyleBackColor = true;
@@ -89,7 +94,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(700, 450);
+            this.ClientSize = new System.Drawing.Size(1836, 1055);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.Go_Users_btn);
             this.Controls.Add(this.Go_returns_btn);

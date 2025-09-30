@@ -70,7 +70,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 16F);
-            this.label1.Location = new System.Drawing.Point(1672, 61);
+            this.label1.Location = new System.Drawing.Point(1648, 346);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(83, 33);
             this.label1.TabIndex = 1;
@@ -80,17 +80,17 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 16F);
-            this.label2.Location = new System.Drawing.Point(1636, 16);
+            this.label2.Location = new System.Drawing.Point(1648, 303);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(143, 33);
             this.label2.TabIndex = 2;
-            this.label2.Text = "رقم التعريف";
+            this.label2.Text = "رقم المحرك";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 16F);
-            this.label3.Location = new System.Drawing.Point(1679, 255);
+            this.label3.Location = new System.Drawing.Point(1648, 553);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(85, 33);
             this.label3.TabIndex = 3;
@@ -100,7 +100,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Tahoma", 16F);
-            this.label4.Location = new System.Drawing.Point(1686, 204);
+            this.label4.Location = new System.Drawing.Point(1648, 505);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(91, 33);
             this.label4.TabIndex = 4;
@@ -110,7 +110,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Tahoma", 16F);
-            this.label5.Location = new System.Drawing.Point(1686, 153);
+            this.label5.Location = new System.Drawing.Point(1648, 451);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(69, 33);
             this.label5.TabIndex = 5;
@@ -122,7 +122,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TB_Motor_Id.Font = new System.Drawing.Font("Tahoma", 12F);
-            this.TB_Motor_Id.Location = new System.Drawing.Point(1365, 25);
+            this.TB_Motor_Id.Location = new System.Drawing.Point(1365, 303);
             this.TB_Motor_Id.Name = "TB_Motor_Id";
             this.TB_Motor_Id.Size = new System.Drawing.Size(250, 32);
             this.TB_Motor_Id.TabIndex = 0;
@@ -131,7 +131,7 @@
             // Tb_Motor_Name
             // 
             this.Tb_Motor_Name.Font = new System.Drawing.Font("Tahoma", 12F);
-            this.Tb_Motor_Name.Location = new System.Drawing.Point(1365, 70);
+            this.Tb_Motor_Name.Location = new System.Drawing.Point(1365, 346);
             this.Tb_Motor_Name.Name = "Tb_Motor_Name";
             this.Tb_Motor_Name.Size = new System.Drawing.Size(250, 32);
             this.Tb_Motor_Name.TabIndex = 1;
@@ -140,7 +140,7 @@
             // Tb_Motor_Quntity
             // 
             this.Tb_Motor_Quntity.Font = new System.Drawing.Font("Tahoma", 12F);
-            this.Tb_Motor_Quntity.Location = new System.Drawing.Point(1365, 264);
+            this.Tb_Motor_Quntity.Location = new System.Drawing.Point(1365, 553);
             this.Tb_Motor_Quntity.Name = "Tb_Motor_Quntity";
             this.Tb_Motor_Quntity.Size = new System.Drawing.Size(250, 32);
             this.Tb_Motor_Quntity.TabIndex = 5;
@@ -148,7 +148,7 @@
             // Tb_Motor_Price
             // 
             this.Tb_Motor_Price.Font = new System.Drawing.Font("Tahoma", 12F);
-            this.Tb_Motor_Price.Location = new System.Drawing.Point(1365, 213);
+            this.Tb_Motor_Price.Location = new System.Drawing.Point(1365, 505);
             this.Tb_Motor_Price.Name = "Tb_Motor_Price";
             this.Tb_Motor_Price.Size = new System.Drawing.Size(250, 32);
             this.Tb_Motor_Price.TabIndex = 4;
@@ -156,7 +156,7 @@
             // Tb_Motor_Power
             // 
             this.Tb_Motor_Power.Font = new System.Drawing.Font("Tahoma", 12F);
-            this.Tb_Motor_Power.Location = new System.Drawing.Point(1365, 164);
+            this.Tb_Motor_Power.Location = new System.Drawing.Point(1365, 451);
             this.Tb_Motor_Power.Name = "Tb_Motor_Power";
             this.Tb_Motor_Power.Size = new System.Drawing.Size(250, 32);
             this.Tb_Motor_Power.TabIndex = 3;
@@ -229,7 +229,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Tahoma", 16F);
-            this.label6.Location = new System.Drawing.Point(1688, 106);
+            this.label6.Location = new System.Drawing.Point(1648, 393);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(67, 33);
             this.label6.TabIndex = 21;
@@ -238,7 +238,7 @@
             // Tb_Tybe
             // 
             this.Tb_Tybe.Font = new System.Drawing.Font("Tahoma", 12F);
-            this.Tb_Tybe.Location = new System.Drawing.Point(1365, 115);
+            this.Tb_Tybe.Location = new System.Drawing.Point(1365, 393);
             this.Tb_Tybe.Name = "Tb_Tybe";
             this.Tb_Tybe.Size = new System.Drawing.Size(250, 32);
             this.Tb_Tybe.TabIndex = 2;

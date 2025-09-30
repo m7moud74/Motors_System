@@ -20,6 +20,12 @@ namespace Motors_System.Forms
         public LoginForm()
         {
             InitializeComponent();
+            this.FormBorderStyle = FormBorderStyle.FixedDialog; 
+            this.MaximizeBox = false; 
+            this.MinimizeBox = true;
+            this.WindowState = FormWindowState.Maximized;
+
+          
 
         }
 
